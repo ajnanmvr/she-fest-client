@@ -1,0 +1,148 @@
+query GetAllProgrammes {
+  programmes {
+    id
+    name
+    programCode
+    resultEntered
+    resultPublished
+    candidateCount
+    category {
+      name
+    }
+    skill {
+      name
+    }
+  }
+}
+
+query GetDetailedProgramme($id: Int!) {
+  programme(id: $id) {
+    candidateProgramme {
+      candidate {
+        name
+        chestNO
+      }
+    }
+    resultEntered
+    resultPublished
+    programCode
+    model
+  }
+}
+
+query GetOneProgramme($id: Int!) {
+  programme(id: $id) {
+    id
+    name
+    resultEntered
+    resultPublished
+    programCode
+    model
+    duration
+    anyIssue
+    candidateCount
+    groupCount
+    category {
+      name
+    }
+    skill {
+      name
+    }
+    type
+    mode
+    conceptNote
+  }
+}
+
+mutation AddProgramme(
+  $name: String!
+  $candidateCount: Int!
+  $category: String!
+  $duration: Int!
+  $groupCount: Int
+  $model: Model!
+  $programCode: String!
+  $type: Type!
+  $mode: Mode!
+  $skill: String!
+  $conceptNote: String!
+) {
+  createProgramme(
+    createProgrammeInput: {
+      name: $name
+      candidateCount: $candidateCount
+      category: $category
+      duration: $duration
+      groupCount: $groupCount
+      model: $model
+      programCode: $programCode
+      type: $type
+      mode: $mode
+      skill: $skill
+      conceptNote: $conceptNote
+    }
+  ) {
+    id
+    name
+    resultEntered
+    resultPublished
+    programCode
+    model
+  }
+}
+
+mutation AddManyProgrammes($inputs: [CreateProgrammeInput!]!) {
+  createManyProgrammes(createProgrammeInput: { inputs: $inputs }) {
+    id
+    name
+    resultEntered
+    resultPublished
+    programCode
+    model
+  }
+}
+
+mutation EditProgramme(
+  $id: Int!
+  $name: String!
+  $candidateCount: Int!
+  $category: String!
+  $duration: Int!
+  $groupCount: Int
+  $model: Model!
+  $programCode: String!
+  $type: Type!
+  $mode: Mode!
+  $skill: String!
+  $conceptNote: String!
+) {
+  updateProgramme(
+    updateProgrammeInput: {
+      id: $id
+      name: $name
+      candidateCount: $candidateCount
+      category: $category
+      duration: $duration
+      groupCount: $groupCount
+      model: $model
+      programCode: $programCode
+      type: $type
+      mode: $mode
+      skill: $skill
+      conceptNote: $conceptNote
+    }
+  ) {
+    id
+    name
+    resultEntered
+    resultPublished
+    programCode
+    model
+  }
+}
+
+mutation DeleteProgramme($id: Int!) {
+  removeProgramme(id: $id) {
+    __typename
+  }
+}

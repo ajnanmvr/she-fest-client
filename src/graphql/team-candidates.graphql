@@ -1,0 +1,63 @@
+query GetAllTeamCandidates {
+  candidates {
+    id
+    name
+    chestNO
+    category {
+      name
+    }
+    team {
+      name
+    }
+  }
+}
+
+query GetOneTeamCandidate($id: Int!) {
+  candidate(id: $id) {
+    id
+    name
+    imageId
+    dob
+    class
+    adno
+    gender
+    individualPoint
+    groupPoint
+    category {
+      name
+    }
+    team {
+      name
+    }
+  }
+}
+
+query GetDetailedTeamCandidate($id: Int!) {
+  candidate(id: $id) {
+    id
+    chestNO
+    candidateProgrammes {
+      id
+      programme {
+        id
+        type
+        programCode
+        name
+      }
+      grade {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
+      candidatesOfGroup {
+        id
+        name
+        chestNO
+      }
+      point
+    }
+  }
+}

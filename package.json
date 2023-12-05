@@ -1,25 +1,40 @@
 {
-  "name": "she-fest-client",
+  "name": "rms-front",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.3"
+    "@apollo/client": "^3.8.1",
+    "@apollo/experimental-nextjs-app-support": "^0.4.1",
+    "@hookform/resolvers": "^3.2.0",
+    "@types/node": "20.4.7",
+    "@types/react": "18.2.18",
+    "@types/react-dom": "18.2.7",
+    "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
+    "graphql": "^16.7.1",
+    "next": "13.4.12",
+    "next-urql": "^5.0.2",
+    "postcss": "8.4.27",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.45.4",
+    "styled-components": "^6.0.7",
+    "tailwindcss": "3.3.3",
+    "urql": "^4.0.5",
+    "xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0"
+    "@graphql-codegen/cli": "5.0.0",
+    "@graphql-codegen/client-preset": "4.1.0",
+    "@parcel/watcher": "^2.2.0",
+    "daisyui": "^3.5.1",
+    "typescript": "^5.1.6"
   }
 }

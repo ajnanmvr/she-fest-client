@@ -1,0 +1,70 @@
+query GetAllPositions {
+  positions {
+    id
+    name
+    value
+  }
+}
+
+query GetOnePosition($id: Int!) {
+  position(id: $id) {
+    id
+    name
+    value
+    pointGroup
+    pointSingle
+    pointHouse
+  }
+}
+
+mutation AddPosition(
+  $name: String!
+  $pointGroup: Int!
+  $pointSingle: Int!
+  $pointHouse: Int!
+  $value: Int!
+) {
+  createPosition(
+    createPositionInput: {
+      name: $name
+      pointGroup: $pointGroup
+      pointSingle: $pointSingle
+      pointHouse: $pointHouse
+      value: $value
+    }
+  ) {
+    id
+    name
+    value
+  }
+}
+
+mutation EditPosition(
+  $id: Int!
+  $name: String!
+  $pointGroup: Int!
+  $pointSingle: Int!
+  $pointHouse: Int!
+  $value: Int!
+) {
+  updatePosition(
+    updatePositionInput: {
+      id: $id
+      name: $name
+      pointGroup: $pointGroup
+      pointSingle: $pointSingle
+      pointHouse: $pointHouse
+      value: $value
+    }
+  ) {
+    id
+    name
+    value
+  }
+}
+
+mutation DeletePosition($id: Int!) {
+  removePosition(id: $id) {
+    __typename
+  }
+}

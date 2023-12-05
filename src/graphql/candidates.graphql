@@ -1,0 +1,146 @@
+query GetAllCandidates {
+  candidates{
+    id
+    name
+    chestNO
+    category {
+      name
+    }
+    team {
+      name
+    }
+  }
+}
+
+query GetOneCandidate($id: Int!) {
+  candidate(id: $id) {
+    id
+    name
+    imageId
+    dob
+    class
+    adno
+    chestNO
+    gender
+    individualPoint
+    groupPoint
+    category {
+      name
+    }
+    team {
+      name
+    }
+  }
+}
+
+query GetDetailedCandidate($id: Int!) {
+  candidate(id: $id) {
+    id
+    chestNO
+    candidateProgrammes {
+      id
+      programme {
+        id
+        type
+        programCode
+        name
+      }
+      grade {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
+      candidatesOfGroup {
+        id
+        name
+        chestNO
+      }
+      point
+    }
+  }
+}
+
+mutation AddCandidate(
+  $adno: Int
+  $category: String!
+  $chestNO: String!
+  $class: String
+  $name: String!
+  $team: String!
+) {
+  createCandidate(
+    createCandidateInput: {
+      name: $name
+      category: $category
+      chestNO: $chestNO
+      team: $team
+      class: $class
+      adno: $adno
+    }
+  ) {
+    id
+    name
+    chestNO
+    category {
+      name
+    }
+    team {
+      name
+    }
+  }
+}
+
+mutation AddManyCandidates($inputs: [CreateCandidateInput!]!) {
+  createManyCandidates(createCandidateInput: { inputs: $inputs }) {
+    id
+    name
+    chestNO
+    category {
+      name
+    }
+    team {
+      name
+    }
+  }
+}
+
+mutation EditCandidate(
+  $id: Int!
+  $name: String!
+  $adno: Int
+  $category: String
+  $chestNO: String
+  $team: String
+  $class: String
+) {
+  updateCandidate(
+    updateCandidateInput: {
+      id: $id
+      name: $name
+      adno: $adno
+      category: $category
+      chestNO: $chestNO
+      team: $team
+      class: $class
+    }
+  ) {
+    id
+    name
+    chestNO
+    category {
+      name
+    }
+    team {
+      name
+    }
+  }
+}
+
+mutation DeleteCandidate($id: Int!) {
+  removeCandidate(id: $id) {
+    __typename
+  }
+}

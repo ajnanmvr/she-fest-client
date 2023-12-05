@@ -1,0 +1,9 @@
+query getJudges($id:Int!){
+    programme(id:$id){
+        judges{
+            id
+            username
+            judgeName
+        }
+    }
+}

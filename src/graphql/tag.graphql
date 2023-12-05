@@ -1,0 +1,59 @@
+query GetAllTags {
+  tags {
+    id
+    name
+  }
+}
+
+query GetOneTag($id: Int!) {
+  tag(id: $id) {
+    id
+    name
+  }
+}
+
+mutation AddTag(
+  $name: String!
+) {
+  createTag(
+    createTagInput: {
+      name: $name
+    }
+  ) {
+    id
+    name
+  }
+}
+
+mutation EditTag(
+  $id: Int!
+  $name: String!
+) {
+  updateTag(
+    updateTagInput: {
+      id: $id
+      name: $name
+    }
+  ) {
+    id
+    name
+  }
+}
+
+mutation DeleteTag($id: Int!) {
+  removeTag(id: $id) {
+    __typename
+  }
+}
+
+query GetGallerisByTag($id: Int!) {
+  tag(id: $id) {
+    id
+    name
+    galleries{
+        name
+        imageId
+        updatedAt
+    }
+  }
+}

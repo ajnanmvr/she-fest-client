@@ -1,0 +1,48 @@
+query getSettings {
+  details{
+    name
+    logoId
+    id
+    isMultipleResultAllowed
+    motto
+    institution
+    coverId
+    isMediaHave
+    isSkillHave
+    isResultReady
+  }
+}
+
+mutation EditSettings(
+    $id: Int!
+    $name: String!
+    $logoId: String!
+    $motto: String!
+    $institution: String!
+    $coverId: String!
+    $isMediaHave: Boolean!
+    $isSkillHave: Boolean!
+){
+    updateDetail(updateDetailInput:  {
+        id:$id
+        name:$name
+        logoId:$logoId
+        motto:$motto
+        institution:$institution
+        coverId:$coverId
+        isMediaHave:$isMediaHave
+        isSkillHave:$isSkillHave
+    }){
+        id
+        name
+        logoId
+        motto
+        institution
+        coverId
+        isMediaHave
+        isSkillHave
+        isResultReady
+        isMultipleResultAllowed
+    }
+  
+}

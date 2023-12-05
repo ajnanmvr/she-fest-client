@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    vffas
+
+    <script>
+        // fetch graphql api
+        // fetch('http://127.0.0.1:34783/graphql', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ query: `
+        //         query {
+        //             candidates{
+        //                 id
+        //             }
+        //         }
+        //     ` }),
+        // }).then(res => res.json())
+        // .then(res => console.log(res.data));
+
+        // fetch the graphql api in login query and it will set the cookie
+
+        const url = 'https://result-dusky.vercel.app/graphql'
+        const url2 = 'http://127.0.0.1:4000/graphql'
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({
+                query: `
+                {checkLoggedIn{
+    username
+  }}
+            ` }),
+        }).then(res => res.json())
+            .then(res => console.log(res));
+
+
+            fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({
+                query: `
+                mutation{login(username:"Admin" password:"admin"){
+    admin{
+      username
+    }
+  }}
+            ` }),
+        }).then(res => res.json())
+            .then(res => console.log(res));
+
+
+    </script>
+
+</body>
+
+</html>
