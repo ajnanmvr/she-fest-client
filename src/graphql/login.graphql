@@ -1,0 +1,45 @@
+mutation LoginUser($username: String!, $password: String!) {
+  login(username: $username, password: $password) {
+    admin {
+      username
+      id
+      roles
+      categories {
+        id
+        name
+      }
+      team {
+        id
+        name
+      }
+    }
+    token
+  }
+}
+
+query CheckLoggedIn {
+  checkLoggedIn {
+    username
+    id
+    roles
+    categories {
+      id
+      name
+    }
+    team {
+      id
+      name
+    }
+  }
+}
+
+query GetAdmins ($api_key: String!){
+  sections (api_key: $api_key) {
+    id
+    name
+  }
+}
+
+mutation LogOutUser {
+  logout
+}

@@ -1,0 +1,33 @@
+query GetAllSections ($api_key: String!){
+  sections(api_key: $api_key) {
+    id
+    name
+  }
+}
+
+query GetOneSection($id: Int!, $api_key: String!) {
+  section(id: $id, api_key: $api_key) {
+    id
+    name
+  }
+}
+
+mutation AddSection($name: String!) {
+  createSection(createSectionInput: { name: $name }) {
+    id
+    name
+  }
+}
+
+mutation EditSection($id: Int!, $name: String!) {
+  updateSection(updateSectionInput: { id: $id, name: $name }) {
+    id
+    name
+  }
+}
+
+mutation DeleteSection($id: Int!) {
+  removeSection(id: $id) {
+    __typename
+  }
+}

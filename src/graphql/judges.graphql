@@ -1,0 +1,73 @@
+query getJudges($id: Int!, $api_key: String!) {
+  programme(id: $id, api_key: $api_key) {
+    judges {
+      id
+      username
+      judgeName
+    }
+  }
+}
+
+mutation createJudge(
+  $judgeName: String!
+  $username: String!
+  $password: String!
+  $programmeCode: String!
+) {
+  createJudge(
+    createJudgeInput: {
+      judgeName: $judgeName
+      username: $username
+      password: $password
+      programmeCode: $programmeCode
+    }
+  ) {
+    id
+    username
+    judgeName
+    programme {
+      id
+      programCode
+    }
+  }
+}
+
+mutation addPointToProgrammeByJudge(
+  $programmeCode: String!
+  $inputs: [AddResult!]!
+  $judgeId: Float!
+) {
+  uploadMarkByJudge(
+    addResult: { inputs: $inputs }
+    jugdeId: $judgeId
+    programmeCode: $programmeCode
+  )
+}
+
+mutation addResult($input: [AddResult!]!, $programmeCode: String!) {
+  addNormalResult(
+    addResult: { inputs: $input }
+    programmeCode: $programmeCode
+  ) {
+    mark
+    grade{
+      name
+    }
+    position{
+      name
+    }
+    programme{
+      id
+      anyIssue
+    }
+  }
+}
+
+mutation addManualUpload($input : [AddManual!]! , $programmeCode: String!){
+
+   uploadResultManually(addManual:$input , programmeCode:$programmeCode){
+      id
+      anyIssue
+}
+
+}

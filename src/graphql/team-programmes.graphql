@@ -1,0 +1,49 @@
+query GetAllTeamProgrammes ($api_key: String!){
+  programmes (api_key: $api_key) {
+    id
+    name
+    programCode
+    category {
+      name
+    }
+    skill {
+      name
+    }
+  }
+}
+
+query GetDetailedTeamProgramme($id: Int!, $api_key: String!) {
+  programme(id: $id, api_key: $api_key) {
+    candidateProgramme {
+      candidate {
+        name
+        chestNO
+      }
+    }
+    resultPublished
+    programCode
+    model
+  }
+}
+
+query GetOneTeamProgramme($id: Int!, $api_key: String!) {
+  programme(id: $id, api_key: $api_key) {
+    id
+    name
+    resultPublished
+    programCode
+    model
+    duration
+    candidateCount
+    groupCount
+    category {
+      name
+    }
+    skill {
+      name
+    }
+    type
+    mode
+    conceptNote
+  }
+}

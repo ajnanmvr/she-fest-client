@@ -1,0 +1,39 @@
+query GetAllCategories ($api_key: String!){
+  categories(api_key: $api_key) {
+    id
+    name
+  }
+}
+
+query GetOneCategory($id: Int! , $api_key: String!) {
+  category(id: $id , api_key: $api_key) {
+    id
+    name
+    section {
+      id
+      name
+    }
+  }
+}
+
+mutation AddCategory($name: String!, $section: String!) {
+  createCategory(createCategoryInput: { name: $name, section: $section }) {
+    id
+    name
+  }
+}
+
+mutation EditCategory($id: Int!, $name: String!, $section: String!) {
+  updateCategory(
+    updateCategoryInput: { id: $id, name: $name, section: $section }
+  ) {
+    id
+    name
+  }
+}
+
+mutation DeleteCategory($id: Int!) {
+  removeCategory(id: $id) {
+    __typename
+  }
+}

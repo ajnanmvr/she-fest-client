@@ -1,0 +1,63 @@
+query GetAllTeamCandidates ($api_key: String!){
+  candidates (api_key: $api_key){
+    id
+    name
+    chestNO
+    category {
+      name
+    }
+    team {
+      name
+    }
+  }
+}
+
+query GetOneTeamCandidate($id: Int!, $api_key: String!) {
+  candidate(id: $id, api_key: $api_key) {
+    id
+    name
+    imageId
+    dob
+    class
+    adno
+    gender
+    individualPoint
+    groupPoint
+    category {
+      name
+    }
+    team {
+      name
+    }
+  }
+}
+
+query GetDetailedTeamCandidate($id: Int!, $api_key: String!) {
+  candidate(id: $id, api_key: $api_key) {
+    id
+    chestNO
+    candidateProgrammes {
+      id
+      programme {
+        id
+        type
+        programCode
+        name
+      }
+      grade {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
+      candidatesOfGroup {
+        id
+        name
+        chestNO
+      }
+      point
+    }
+  }
+}

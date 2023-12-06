@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /admin/*/
+Sitemap: https://www.tekton23.me/sitemap.xml

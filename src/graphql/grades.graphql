@@ -1,0 +1,70 @@
+query GetAllGrades ($api_key: String!){
+  grades (api_key: $api_key){
+    id
+    name
+    percentage
+  }
+}
+
+query GetOneGrade($id: Int!, $api_key: String!) {
+  grade(id: $id, api_key: $api_key) {
+    id
+    name
+    percentage
+    pointGroup
+    pointHouse
+    pointSingle
+  }
+}
+
+mutation AddGrade(
+  $name: String!
+  $percentage: Int!
+  $pointGroup: Int!
+  $pointHouse: Int!
+  $pointSingle: Int!
+) {
+  createGrade(
+    createGradeInput: {
+      name: $name
+      percentage: $percentage
+      pointGroup: $pointGroup
+      pointHouse: $pointHouse
+      pointSingle: $pointSingle
+    }
+  ) {
+     id
+    name
+    percentage
+  }
+}
+
+mutation EditGrade(
+  $id: Int!
+  $name: String!
+  $percentage: Int!
+  $pointGroup: Int!
+  $pointHouse: Int!
+  $pointSingle: Int!
+) {
+  updateGrade(
+    updateGradeInput: {
+      id: $id
+      name: $name
+      percentage: $percentage
+      pointGroup: $pointGroup
+      pointHouse: $pointHouse
+      pointSingle: $pointSingle
+    }
+  ) {
+     id
+    name
+    percentage
+  }
+}
+
+mutation DeleteGrade($id: Int!) {
+  removeGrade(id: $id) {
+    __typename
+  }
+}

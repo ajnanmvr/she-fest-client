@@ -1,0 +1,15 @@
+mutation PublishResults($programCodes: [String!]!) {
+  publishResults(programmeCode: $programCodes){
+    id
+    resultPublished
+    programCode
+  }
+}
+
+mutation PublishResult($programCodes: String!) {
+  publishResult(programmeCode: $programCodes)
+}
+
+mutation GoLive($programCodes: [String!]!  $timeInSec : Float!) {
+  liveResult(programmeCode: $programCodes , timeInSec:$timeInSec )
+}
