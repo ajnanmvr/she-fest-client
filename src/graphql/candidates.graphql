@@ -1,5 +1,5 @@
-query GetAllCandidates {
-  candidates{
+query GetAllCandidates($api_key: String!) {
+  candidates(api_key: $api_key) {
     id
     name
     chestNO
@@ -12,17 +12,53 @@ query GetAllCandidates {
   }
 }
 
-query GetOneCandidate($id: Int!) {
-  candidate(id: $id) {
+query GetAllDetailedCandidates($api_key: String!) {
+  candidates(api_key: $api_key) {
+    id
+    name
+    adno
+    class
+    chestNO
+    category {
+      name
+    }
+    team {
+      name
+    }
+    id
+    candidateProgrammes {
+      mark
+      point
+      id
+      programme {
+        name
+        programCode
+        model
+        type
+        mode
+      }
+      candidatesOfGroup {
+        id
+      }
+    }
+
+    groupPoint
+    groupSportsPoint
+    individualPoint
+    individualSportsPoint
+  }
+}
+
+query GetOneCandidate($id: Int!, $api_key: String!) {
+  candidate(id: $id, api_key: $api_key) {
     id
     name
     imageId
-    dob
     class
     adno
     chestNO
-    gender
     individualPoint
+    individualSportsPoint
     groupPoint
     category {
       name
@@ -33,8 +69,53 @@ query GetOneCandidate($id: Int!) {
   }
 }
 
-query GetDetailedCandidate($id: Int!) {
-  candidate(id: $id) {
+query GetCandidateByChestNo($api_key: String!, $chestNO: String!) {
+  candidateByChestNo(api_key: $api_key, chestNo: $chestNO) {
+    id
+    chestNO
+    name
+    category {
+      id
+      name
+    }
+    team {
+      id
+      name
+    }
+    individualSportsPoint
+    individualPoint
+    imageId
+    candidateProgrammes {
+      id
+      programme {
+        id
+        resultPublished
+        type
+        programCode
+        date
+        name
+        model
+      }
+      grade {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
+      candidatesOfGroup {
+        id
+        name
+        chestNO
+      }
+      point
+    }
+  }
+}
+
+query GetDetailedCandidate($id: Int!, $api_key: String!) {
+  candidate(id: $id, api_key: $api_key) {
     id
     chestNO
     candidateProgrammes {
@@ -144,3 +225,25 @@ mutation DeleteCandidate($id: Int!) {
     __typename
   }
 }
+
+query CategorBasedToppers{
+  getCategoryBasedToppers{
+    id
+    name
+    candidates{
+      chestNO
+      name
+      imageId
+      category{
+        name
+      }
+      team{
+        name
+      }
+    }
+  }
+}
+
+# mutation fjsakl{
+#   # createCandidateProgramme
+# }

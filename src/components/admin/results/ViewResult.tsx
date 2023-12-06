@@ -1,5 +1,6 @@
 "use client";
 import { AddProgrammeDocument, AddProgrammeMutation, AddProgrammeMutationVariables, GetDetailedCandidateDocument, GetDetailedProgrammeDocument, GetDetailedProgrammeQuery, GetDetailedProgrammeQueryVariables, Mode, Model, Programme, Type } from "@/gql/graphql";
+import { API_KEY } from "@/lib/env";
 import React from "react";
 import { OperationResult, useMutation, useQuery } from "urql";
 
@@ -21,6 +22,7 @@ const ViewResult = (props: Props) => {
     >({
         query: GetDetailedProgrammeDocument,
         variables: {
+            api_key:API_KEY,
             id: props.selectedProgramme?.id as number,
         }
     });

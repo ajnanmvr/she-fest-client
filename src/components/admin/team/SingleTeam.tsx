@@ -9,10 +9,12 @@ import {
   GetOneTeamQuery,
   GetOneTeamQueryVariables,
 } from "@/gql/graphql";
-import {  useState } from "react";
+import { useState } from "react";
 import { OperationResult, useMutation, useQuery } from "urql";
 import EditTeam from "./EditTeam";
 import CreateTeam from "./CreateTeam";
+import { DeleteIcon, EditIcon } from "@/icons/action";
+import { API_KEY } from "@/lib/env";
 
 interface Props {
   id: number;
@@ -23,8 +25,8 @@ interface Props {
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   data: Team[];
   setData: React.Dispatch<React.SetStateAction<Team[]>>;
-  isOpen : boolean;
-  setIsOpen : React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const OneTeam = (props: Props) => {
@@ -37,6 +39,7 @@ const OneTeam = (props: Props) => {
     query: GetOneTeamDocument,
     variables: {
       id: props.id,
+      api_key: API_KEY
     },
     pause: props.isCreate || props.isEdit,
   });
@@ -44,14 +47,14 @@ const OneTeam = (props: Props) => {
   const [state, DeleteTeamExecute] = useMutation(DeleteTeamDocument);
 
 
-  const HandleDelete =async ()=>{
-    
-    const deletedData : OperationResult<DeleteTeamMutation,DeleteTeamMutationVariables> = await DeleteTeamExecute({
+  const HandleDelete = async () => {
+
+    const deletedData: OperationResult<DeleteTeamMutation, DeleteTeamMutationVariables> = await DeleteTeamExecute({
       id: props.id
     });
-    
-    if(deletedData.data?.removeTeam?.__typename){
-      const deleted = props.data.filter((value , index)=>{
+
+    if (deletedData.data?.removeTeam?.__typename) {
+      const deleted = props.data.filter((value, index) => {
         return value.id !== props.id;
       })
 
@@ -59,12 +62,12 @@ const OneTeam = (props: Props) => {
       props.setIsOpen(false)
     }
     setModalOpen(false)
-}
+  }
 
   const Team = data?.team;
 
   return (
-    <div>
+    <div className="w-full h-full">
       {props.isEdit ? (
         <EditTeam
           key={1}
@@ -79,35 +82,65 @@ const OneTeam = (props: Props) => {
           shortName={Team?.shortName as string}
         />
       ) : props.isCreate ? (
-        <CreateTeam key={2} data={props.data} setData={props.setData} />
+        <CreateTeam isOpen={props.isEdit} key={2} data={props.data} setData={props.setData} />
       ) : (
-        <div>
+        <div className="w-full h-full">
           {fetching ? (
             <p> loading... </p>
           ) : (
-            <div>
-              <p>name</p>
-              <p className="text-blue-400">{Team?.name}</p>
-              <p>id</p>
-              <p className="text-blue-400">{Team?.id}</p>
-              <p>color</p>
-              <p className="text-blue-400">{Team?.color}</p>
-              <p>description</p>
-              <p className="text-blue-400">{Team?.description}</p>
-              <p>ShortName</p>
-              <p className="text-blue-400">{Team?.shortName}</p>
-              <button
-                className="bg-blue-500"
-                onClick={() => {
-                  props.setIsEdit(true);
-                  props.setIsCreate(false);
-                }}
-              >
-                Edit
-              </button>
-              <button className="bg-red-600" onClick={() => setModalOpen(true)}>
-                Delete
-              </button>
+            <div className="w-full h-full flex flex-col justify-between">
+
+              <div className="relative top-15 flex flex-col items-center justify-center gap-4">
+
+
+                <div className="flex flex-col gap-1 w-full ">
+                  <p className="text-base text-[#8D8D8D]" >Name</p>
+                  <span className="input input-bordered input-secondary w-full max-w-xs pt-2 text-[#3F127A] border-none">{Team?.name}</span>
+                </div>
+
+                <div className="flex flex-col gap-1 w-full">
+                  <p className="text-base text-[#8D8D8D]" >Short Name</p>
+                  <span className="bg-[#FFFFFF] rounded-lg px-3 py-3  w-full text-[#3F127A]  ">{Team?.shortName}</span>
+                </div>
+
+                <div className="flex flex-col gap-1 w-full">
+                  <p className="text-base text-[#8D8D8D]" >Description</p>
+                  <span className="bg-[#FFFFFF] rounded-lg px-3 py-3  w-full text-[#3F127A] ">{Team?.description}</span>
+                </div>
+                <div className="flex flex-col gap-1  w-full  ">
+                  <p className="text-base text-[#8D8D8D]" >Color</p>
+
+                  <div className="input input-bordered input-secondary w-full max-w-xs  text-[#3F127A] border-none flex items-center  gap-1 ">
+                    <div className={`p-3`} style={{ background: Team?.color as string }}> </div>
+                    <span>{Team?.color}</span>
+
+                  </div>
+                </div>
+
+              </div>
+              <div className="w-full mt-4 flex items-center justify-between">
+                <div
+                  className="w-1/2 flex items-center justify-center tooltip"
+                  data-tip="Back"
+                ></div>
+                <div className="w-1/2 flex items-center justify-around">
+                  <button
+                    className=" border-2 text-white px-3 py-2 border-secondary rounded-xl font-bold"
+                    onClick={() => {
+                      props.setIsEdit(true);
+                      props.setIsCreate(false);
+                    }}
+                  >
+                    <EditIcon className="w-6 h-6 cursor-pointer fill-secondary  transition-all" />
+                  </button>
+                  <button
+                    className=" border-2 text-white px-3 py-2 border-secondary rounded-xl font-bold"
+                    onClick={() => setModalOpen(true)}
+                  >
+                    <DeleteIcon className="w-6 h-6 cursor-pointer fill-secondary  transition-all" />
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>
@@ -115,7 +148,9 @@ const OneTeam = (props: Props) => {
 
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} key={3}>
         <p>Are you sure Do you want to Delete ?</p>
-        <button className="bg-red-600" onClick={HandleDelete}>Delete</button>
+        <button className="bg-red-600" onClick={HandleDelete}>
+          Delete
+        </button>
         <button className="bg-blue-500" onClick={() => setModalOpen(false)}>
           Cancel
         </button>

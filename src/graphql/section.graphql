@@ -1,12 +1,12 @@
-query GetAllSections {
-  sections {
+query GetAllSections ($api_key: String!){
+  sections(api_key: $api_key) {
     id
     name
   }
 }
 
-query GetOneSection($id: Int!) {
-  section(id: $id) {
+query GetOneSection($id: Int!, $api_key: String!) {
+  section(id: $id, api_key: $api_key) {
     id
     name
   }

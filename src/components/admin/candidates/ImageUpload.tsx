@@ -28,7 +28,7 @@ const ImageUpload = () => {
       console.log(formData);
 
       const res = await fetch(
-        `https://rms-omega-six.vercel.app/candidates/uploadMultiple`,
+        `https://result-gen.vercel.app/candidates/uploadMultiple`,
         {
           method: "POST",
           body: formData,

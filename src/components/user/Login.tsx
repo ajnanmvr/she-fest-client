@@ -12,7 +12,6 @@ import {
   cacheExchange,
   fetchExchange,
   useMutation,
-  useQuery,
 } from "urql";
 import { withUrqlClient } from "next-urql";
 import {
@@ -20,6 +19,7 @@ import {
   LoginUserMutation,
   LoginUserMutationVariables,
 } from "@/gql/graphql";
+import NProgress from "nprogress";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -27,8 +27,13 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const { data, setData } = useGlobalContext();
 
-  const [state, LoginMutaion] = useMutation(LoginUserDocument);
+  const [state, LoginMutation] = useMutation(LoginUserDocument);
+  const [routerButtonClicked, setRouterButtonClicked] = useState(false);
+  NProgress.configure({ showSpinner: false });
 
+  useEffect(() => {
+    routerButtonClicked ? NProgress.start() : null;
+  }, [routerButtonClicked]);
   const {
     register,
     handleSubmit,
@@ -43,7 +48,7 @@ const LoginPage = () => {
     const datas: OperationResult<
       LoginUserMutation,
       LoginUserMutationVariables
-    > = await LoginMutaion(data);
+    > = await LoginMutation(data);
     await login(datas.data?.login.token as string);
     if (!datas.data?.login) {
       setError("Invalid username or password");
@@ -55,82 +60,84 @@ const LoginPage = () => {
         },
         token: datas.data?.login.token,
       });
+      setRouterButtonClicked(true);
       router.push("/admin");
     }
     reset();
   };
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 transition-all">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <a className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-          <img
-            className="w-8 h-8 mr-2"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-            alt="logo"
-          />
-          LOGIN
-        </a>
-        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-center text-gray-900 md:text-2xl dark:text-white">
-              Sign in
-            </h1>
-            <p className="text-sm text-center text-red-500 dark:text-gray-400 transition-all">
-              {error}
-            </p>
-            <form
-              className="space-y-4 md:space-y-6"
-              onSubmit={(e)=>{
-                e.preventDefault()
-                handleSubmit(HandleLogin)()
-              }}
-            >
-              <div>
-                <label
-                  htmlFor="username"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Username
-                </label>
-                <input
-                  {...register("username")}
-                  type="text"
-                  name="username"
-                  id="username"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="jhon"
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Password
-                </label>
-                <input
-                  {...register("password")}
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
-              </div>
-              <div className="flex items-center justify-between"></div>
-              <button
-                disabled={isSubmitting}
-                type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                {isSubmitting ? "Signing In" : " Sign in "}
-              </button>
-            </form>
-          </div>
-        </div>
+    <div className="flex h-[40rem] flex-col justify-center px-6 py-12 lg:px-8 fixed top-1/2 bottom-1/2 -translate-y-1/2 bg-white w-96 sm:w-[30rem] rounded-xl left-1/2 -translate-x-1/2 sm:shadow-xl">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm -mt-10 ">
+        <img
+          src="/img/realia-txt-black.png"
+          className="mx-auto h-12"
+          alt="fsfs"
+        />
       </div>
-    </section>
+      <p className="text-red-700 text-center mt-4">{error}</p>
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit(HandleLogin)();
+          }}
+          className="space-y-6"
+        >
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Username
+            </label>
+            <div className="mt-2">
+              <input
+                {...register("username")}
+                id="username"
+                name="username"
+                type="text"
+                required
+                placeholder="username"
+                className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+          <div>
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Password
+              </label>
+              <div className="text-sm"></div>
+            </div>
+            <div className="mt-2">
+              <input
+                placeholder="••••••••"
+                {...register("password")}
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                required
+                className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+          </div>
+          <div>
+            <button
+              disabled={isSubmitting}
+              type="submit"
+              className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              {isSubmitting ? "Signing In" : " Sign in "}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 };
 

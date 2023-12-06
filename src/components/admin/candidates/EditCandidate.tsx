@@ -9,6 +9,7 @@ import {
 import { EditBoxIcon, EditIcon } from "@/icons/action";
 import { ChevronRight } from "@/icons/arrows";
 import React from "react";
+import { toast } from "react-toastify";
 import { OperationResult, useMutation } from "urql";
 
 interface Props {
@@ -59,14 +60,14 @@ const EditCandidate = (props: Props) => {
       category: data.category,
       adno: data.adno,
       chestNO: data.chestNO,
-      class: data.class,
+      class: data.classs,
       team: data.team,
     });
 
     console.log(updatedData);
 
     if (updatedData.data?.updateCandidate) {
-      alert("Candidate Updated");
+      toast.success("Candidate Updated");
       const updatedDates = props.data.map((value, index) => {
         if (value.id == updatedData.data?.updateCandidate?.id) {
           return (value = updatedData.data?.updateCandidate as Candidate);
@@ -78,9 +79,9 @@ const EditCandidate = (props: Props) => {
 
       props.setData(updatedDates as Candidate[]);
     } else if (updatedData.error?.message) {
-      alert(updatedData.error?.message.split("]")[1]);
+      updatedData.error?.message.split("]")[1].startsWith(" target") ? toast.error("server error") : toast.error(updatedData.error?.message.split("]")[1]);
     } else {
-      alert("Candidate Not Updated");
+      toast.error("Something went wrong");
     }
     setIsLoading(false);
     props.setIsEdit(false);

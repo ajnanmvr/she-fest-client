@@ -4,7 +4,7 @@ const nextConfig = {
         serverActions : true
     },
     images: {
-        domains: ['localhost' , 'res.cloudinary.com' , 'drive.google.com'],
+        domains: ['localhost' , 'res.cloudinary.com' , 'drive.google.com' ,'flowbite.s3.amazonaws.com'],
     },
 }
 

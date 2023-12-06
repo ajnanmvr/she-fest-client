@@ -18,6 +18,7 @@ import EditProgramme from "./EditJudge";
 import CreateProgramme from "./CreateJudge";
 import ViewProgramme from "./ViewJudge";
 import ExcelUploadProgramme from "./ExcelUploadJudge";
+import { API_KEY } from "@/lib/env";
 
 interface Props {
   id: number;
@@ -50,6 +51,7 @@ const OneProgramme = (props: Props) => {
     query: GetJudgesDocument,
     variables: {
       id: props.id,
+      api_key : API_KEY
     },
     pause: props.isCreate || props.isEdit,
   });

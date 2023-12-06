@@ -1,13 +1,13 @@
-query GetAllGrades {
-  grades {
+query GetAllGrades ($api_key: String!){
+  grades (api_key: $api_key){
     id
     name
     percentage
   }
 }
 
-query GetOneGrade($id: Int!) {
-  grade(id: $id) {
+query GetOneGrade($id: Int!, $api_key: String!) {
+  grade(id: $id, api_key: $api_key) {
     id
     name
     percentage

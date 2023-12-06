@@ -70,8 +70,8 @@ const Section = (props: Props) => {
   return (
     <>
       <div className="w-full h-full">
-        <InfoBar data={props.data} />
-        <div className="w-full h-screen lg:h-4/5 flex mt-[3%] ">
+        
+        <div className="w-full h-screen lg:h-[90%] flex mt-[3%] ">
           <div className="flex-1 w-full">
             <div className="h-10 cursor-pointer flex justify-between mb-4">
               {/* search bar */}
@@ -130,7 +130,7 @@ const Section = (props: Props) => {
                       }}
                     >
                       <div className="text-white font-bold bg-secondary px-3 py-1 text-xl rounded-xl flex justify-center content-center items-center">
-                        <p>{item.id}</p>
+                        <p>{index+1}</p>
                       </div>
 
                       <p className="text-black leading-5 pr-[10%]">
@@ -152,7 +152,7 @@ const Section = (props: Props) => {
               setIsOpen={setIsRightSideBarOpen}
             >
               <SingleSection
-                isOpen={IsRightSideBarOpen}
+            
                 setIsOpen={setIsRightSideBarOpen}
                 key={3}
                 name={SelectedSection.name}

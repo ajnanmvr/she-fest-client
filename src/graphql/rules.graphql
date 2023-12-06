@@ -1,5 +1,5 @@
-query GetRules($id: Int!) {
-  category(id: $id) {
+query GetRules($id: Int!, $api_key: String!) {
+  category(id: $id, api_key: $api_key) {
     id
     name
     settings {

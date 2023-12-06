@@ -1,6 +1,7 @@
 "use client";
 import { AddProgrammeDocument, AddProgrammeMutation, AddProgrammeMutationVariables, Category, Mode, Model, Programme, Skill, Type } from "@/gql/graphql";
 import React from "react";
+import { toast } from "react-toastify";
 import { OperationResult, useMutation } from "urql";
 
 interface Props {
@@ -45,10 +46,10 @@ const CreateResult = (props: Props) => {
     
 
     if (datas.data?.createProgramme) {
-      alert("Programme Added");
+      toast.success("Programme Added");
       props.setData([...props.data, datas.data?.createProgramme as Programme]);
     } else {
-      alert("Programme Not Added");
+      datas.error?.message.split("]")[1].startsWith(" target") ? toast.error("server error") : toast.error(datas.error?.message.split("]")[1]);
     }
   };
 

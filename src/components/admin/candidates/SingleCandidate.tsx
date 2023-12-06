@@ -20,6 +20,7 @@ import ExcelUploadCandidate from "./ExcelUploadCandidate";
 import Image from "next/image";
 import ImageUpload from "./ImageUpload";
 import { EditIcon, DeleteIcon } from "@/icons/action";
+import { API_KEY } from "@/lib/env";
 
 interface Props {
   id: number;
@@ -52,6 +53,7 @@ const OneCandidate = (props: Props) => {
     query: GetOneCandidateDocument,
     variables: {
       id: props.id,
+      api_key : API_KEY
     },
     pause: props.isCreate || props.isEdit || props.isExcelUpload,
   });
@@ -134,18 +136,18 @@ const OneCandidate = (props: Props) => {
                   {Candidate?.chestNO}
                 </p>
                 <p className="font-bold text-2xl leading-7 mt-2 text-center">
-                  {Candidate?.name} Muhammed
+                  {Candidate?.name}   
                 </p>
                 <p className=" font-bold">Team {Candidate?.team?.name}</p>
                 <p className="">{Candidate?.category?.name}</p>
                 <div className="flex justify-center gap-3 mt-3 ">
                   <div className="flex flex-col items-center justify-center content-center w-20 h-20 rounded-xl  border-2 border-dashed border-secondary">
-                    <p className="font-bold">Single</p>
+                    <p className="font-bold">Arts</p>
                     <p className="font-bold text-5xl text-secondary">{Candidate?.individualPoint || 0}</p>
                   </div>
                   <div className="flex flex-col items-center justify-center content-center w-20 h-20 rounded-xl  border-2 border-dashed border-secondary">
-                    <p className="font-bold">Group</p>
-                    <p className="font-bold text-5xl text-secondary">{Candidate?.groupPoint || 0}</p>
+                    <p className="font-bold">Sports</p>
+                    <p className="font-bold text-5xl text-secondary">{Candidate?.individualSportsPoint || 0}</p>
                   </div>
 
                 </div>
@@ -183,13 +185,16 @@ const OneCandidate = (props: Props) => {
       )}
 
       <Modal modalOpen={modalOpen} setModalOpen={setModalOpen} key={3}>
-        <p>Are you sure Do you want to Delete ?</p>
-        <button className="bg-red-600" onClick={HandleDelete}>
+        <p className=" font-[500] ">Are you sure Do you want to Delete ?</p>
+        <div className="w-full h-full flex gap-2 mt-1 p-2">
+        <button className="focus:outline-none text-white bg-error hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-1.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" onClick={HandleDelete}>
           Delete
         </button>
-        <button className="bg-blue-500" onClick={() => setModalOpen(false)}>
+        <button className="text-white bg-info hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-1.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => setModalOpen(false)}>
           Cancel
         </button>
+        </div>
+     
       </Modal>
 
       <ViewCandidate

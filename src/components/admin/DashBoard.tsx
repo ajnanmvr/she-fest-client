@@ -23,9 +23,6 @@ const DashBoard = (props : Props) => {
 
         <div className="w-full h-5/6 bg-base-200 rounded-lg mt-[1%]" onClick={()=> setIsRightSideBarOpen(!IsRightSideBarOpen)} ></div>
       </div>
-      <RightSideBar  isOpen={IsRightSideBarOpen} setIsOpen={setIsRightSideBarOpen} > 
-      fs
-      </RightSideBar>
     </>
   )
 }

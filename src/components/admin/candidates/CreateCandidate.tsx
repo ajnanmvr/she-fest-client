@@ -12,6 +12,7 @@ import {
 } from "@/gql/graphql";
 import { AddIcon } from "@/icons/action";
 import React from "react";
+import { toast } from "react-toastify";
 import { OperationResult, useMutation } from "urql";
 
 interface Props {
@@ -41,7 +42,7 @@ const CreateCandidate = (props: Props) => {
       chestNO: data.chestNO,
       team: data.team,
       adno: data.adno,
-      class: data.class,
+      class: data.classs,
     });
 
     console.log(datas);
@@ -60,7 +61,7 @@ const CreateCandidate = (props: Props) => {
 
         // upload image to server using axios
         const res = await fetch(
-          `https://rms-omega-six.vercel.app/candidates/upload`,
+          `https://result-gen.vercel.app/candidates/upload`,
           {
             method: "POST",
             body: formData,
@@ -69,10 +70,10 @@ const CreateCandidate = (props: Props) => {
 
         console.log(await res.json());
       }
-      alert("Candidate Added");
+      toast.success("Candidate Added");
       props.setData([...props.data, datas.data?.createCandidate as Candidate]);
     } else {
-      alert(datas.error?.message.split("]")[1]);
+      datas.error?.message.split("]")[1].startsWith(" target") ? toast.error("server error") : toast.error(datas.error?.message.split("]")[1]);
     }
   };
 

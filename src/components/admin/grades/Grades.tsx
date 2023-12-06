@@ -47,39 +47,30 @@ const Grade = (props: Props) => {
   return (
     <>
       <div className="w-full h-full">
-        <InfoBar data={props.data} />
-
-        <div className="w-full h-5/6 bg-base-200 rounded-lg mt-[1%]">
-          <div>
-            {/* search bar */}
-            <div className="w-full h-10 bg-base-300 rounded-lg mt-[1%] cursor-pointer">
-              <div className="w-1/3 h-full float-left">
-                <input
-                  type="text"
-                  value={search}
-                  onChange={(e) => {
-                    setSearch(e.target.value);
-                    setData(
-                      props.result.filter((item: any) =>
-                        item.name
-                          .toLocaleLowerCase()
-                          .includes(e.target.value.toLocaleLowerCase())
-                      )
-                    );
-                  }}
-                />
-              </div>
-              <div className="w-1/3 h-full float-left">
+        {/* <InfoBar data={props.data} /> */}
+        <div className="w-full h-screen lg:h-[90%] flex mt-[3%] ">
+          <div className="flex-1 w-full">
+            <div className="h-10 cursor-pointer flex justify-between mb-4">
+              {/* search bar */}
+              <input
+                className="w-1/3 lg:w-1/4 rounded-full bg-[#EEEEEE] px-5 text-xl border-secondary"
+                type="text"
+                placeholder="Search"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setData(
+                    props.result.filter((item: any) =>
+                      item.name
+                        .toLocaleLowerCase()
+                        .includes(e.target.value.toLocaleLowerCase())
+                    )
+                  );
+                }}
+              />
+              <div>
                 <button
-                  className="bg-blue-600"
-                  onClick={downloadExcel}
-                >
-                  Export
-                </button>
-              </div>
-              <div className="w-1/3 h-full float-left">
-                <button
-                  className="bg-green-600"
+                  className="inline-flex bg-secondary text-white rounded-full px-5 py-2 font-bold"
                   onClick={() => {
                     setIsCreate(true);
                     setIsEdit(false);
@@ -88,60 +79,74 @@ const Grade = (props: Props) => {
                 >
                   Create
                 </button>
+                <button
+                  className="ml-1 bg-secondary text-white rounded-full px-5 py-2 font-bold"
+                  onClick={downloadExcel}
+                >
+                  Export
+                </button>
+              </div>
+            </div>
+
+            <div className="flex flex-col w-full overflow-y-auto h-full">
+              <div
+                className={`grid gap-4 w-full transition-all grid-cols-1 ${
+                  IsRightSideBarOpen ? "lg:grid-cols-3" : "lg:grid-cols-4"
+                }`}
+              >
+                {data?.map((item: any, index: number) => {
+                  return (
+                    <div
+                      key={index}
+                      className="transition-all bg-[#EEEEEE] rounded-xl mt-[1%] cursor-pointer flex p-5 gap-3 content-center items-center h-20"
+                      onClick={() => {
+                        setIsRightSideBarOpen(true);
+                        setSelectedGrade(item);
+                        setIsEdit(false);
+                        setIsCreate(false);
+                      }}
+                    >
+                      <div className="text-white font-bold bg-secondary px-3 py-1 text-xl rounded-xl flex justify-center content-center items-center">
+                        <p>{index+1}</p>
+                      </div>
+
+                      <p className="text-black leading-5 pr-[10%]">
+                        {item.name}
+                      </p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
 
-          <div className="flex">
-            <div className="grid grid-cols-4 gap-4 w-full">
-              {data?.map((item: Grade, index: number) => {
-                return (
-                  <div
-                    key={index}
-                    className="w-full h-full bg-base-100 rounded-lg mt-[1%] cursor-pointer "
-                    onClick={() => {
-                      setIsRightSideBarOpen(true);
-                      setSelectedGrade(item as any);
-                      setIsEdit(false);
-                      setIsCreate(false);
-                    }}
-                  >
-                    <div className="w-1/3">
-                      <p className="text-base-content">{item.name}</p>
-                    </div>
-                    <div className="w-1/3 ">
-                      <p className="text-base-content">{item.percentage}</p>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          {/* </div> */}
+            <RightSideBar
+              isCreate={isCreate}
+              isEdit={isEdit}
+              key={1}
+              isOpen={IsRightSideBarOpen}
+              setIsOpen={setIsRightSideBarOpen}
+            >
+              <SingleGrade
+                isOpen={IsRightSideBarOpen}
+                setIsOpen={setIsRightSideBarOpen}
+                key={3}
+                name={SelectedGrade.name as string}
+                id={SelectedGrade.id as number}
+                isEdit={isEdit}
+                setIsEdit={setIsEdit}
+                isCreate={isCreate}
+                setIsCreate={setIsCreate}
+                data={data}
+                setData={setData}
+              />
+            </RightSideBar>
         </div>
       </div>
-      <RightSideBar
-        key={1}
-        isOpen={IsRightSideBarOpen}
-        setIsOpen={setIsRightSideBarOpen}
-      >
-        <SingleGrade
-          isOpen={IsRightSideBarOpen}
-          setIsOpen={setIsRightSideBarOpen}
-          key={3}
-          name={SelectedGrade.name as string}
-          id={SelectedGrade.id as number}
-          isEdit={isEdit}
-          setIsEdit={setIsEdit}
-          isCreate={isCreate}
-          setIsCreate={setIsCreate}
-          data={data}
-          setData={setData}
-        />
-      </RightSideBar>
     </>
   );
 };
-
 export default withUrqlClient(() => ({
   url: SERVER_URL,
   exchanges: [fetchExchange, cacheExchange],

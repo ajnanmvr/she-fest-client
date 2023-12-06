@@ -14,6 +14,8 @@ import { OperationResult, useMutation, useQuery } from "urql";
 import EditSection from "./EditSection";
 import CreateSection from "./CreateSection";
 import { DeleteIcon, EditIcon } from "@/icons/action";
+import { API_KEY } from "@/lib/env";
+import { Category } from "@/icons/navs";
 
 interface Props {
   id: number;
@@ -24,7 +26,7 @@ interface Props {
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
   data: Section[];
   setData: React.Dispatch<React.SetStateAction<Section[]>>;
-  isOpen: boolean;
+
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -38,7 +40,9 @@ const OneSection = (props: Props) => {
     query: GetOneSectionDocument,
     variables: {
       id: props.id,
+      api_key : API_KEY
     },
+    pause: props.isEdit && !props.isCreate,
   });
 
   const [state, DeleteSectionExecute] = useMutation(DeleteSectionDocument);
@@ -68,6 +72,8 @@ const OneSection = (props: Props) => {
     <div className="w-full h-full">
       {props.isEdit ? (
         <EditSection
+          isOpen={props.isEdit}
+        
           key={1}
           setIsEdit={props.setIsEdit}
           isEdit={props.isEdit}
@@ -75,18 +81,29 @@ const OneSection = (props: Props) => {
           id={Section?.id as number}
           data={props.data}
           setData={props.setData}
+          
         />
       ) : props.isCreate ? (
-        <CreateSection key={2} data={props.data} setData={props.setData} />
+        <CreateSection   isOpen={props.isEdit} key={2} data={props.data} setData={props.setData} />
       ) : (
         <div className="w-full h-full">
           {fetching ? (
             <p> loading... </p>
           ) : (
             <div className="w-full h-full flex flex-col justify-between">
-              <div>
-                <p className="font-bold text-2xl leading-7 mt-2 text-center"><span className="font-normal">Name:</span>{Section?.name}</p>
+            
+              <div className="relative top-15 flex flex-col items-center justify-center gap-4">
+              
+
+              <div  className="flex flex-col gap-2 w-full">
+              <p className="text-base text-[#8D8D8D]" >Name</p>
+              <p className="input input-bordered input-secondary w-full max-w-xs pt-2 text-[#3F127A] border-none">{Category?.name}</p>
+              
               </div>
+             
+          
+             
+            </div>
               <div className="w-full mt-4 flex items-center justify-between">
               <div
             className="w-1/2 flex items-center justify-center tooltip"
@@ -98,6 +115,7 @@ const OneSection = (props: Props) => {
                     onClick={() => {
                       props.setIsEdit(true);
                       props.setIsCreate(false);
+                      
                     }}
                   >
                     <EditIcon className="w-6 h-6 cursor-pointer fill-secondary  transition-all" />

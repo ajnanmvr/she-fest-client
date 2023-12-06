@@ -1,5 +1,6 @@
 "use client";
 import { Candidate, GetDetailedCandidateDocument, GetDetailedCandidateQuery, GetDetailedCandidateQueryVariables } from "@/gql/graphql";
+import { API_KEY } from "@/lib/env";
 import React from "react";
 import { OperationResult, useMutation, useQuery } from "urql";
 
@@ -22,6 +23,7 @@ const ViewTeamCandidate = (props: Props) => {
         query: GetDetailedCandidateDocument,
         variables: {
             id: props.selectedCandidate?.id as number,
+            api_key : API_KEY
         }
     });
 

@@ -10,7 +10,7 @@ export default function Navbar() {
   const router = useRouter()
 
     return (
-        <div className="navbar bg-slate-200 rounded-2xl w-11/12 absolute left-1/2 right-1/2 -translate-x-1/2 top-4 justify-between">
+        <div className="navbar bg-slate-200 rounded-2xl w-11/12 absolute left-1/2 right-1/2 -translate-x-1/2 top-4 justify-between z-40">
         <div className="navbar-start ">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">

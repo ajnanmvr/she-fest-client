@@ -1,6 +1,7 @@
 import { Candidate, Programme } from "@/gql/graphql";
-import React from "react";
+import React, { useEffect } from "react";
 import CandidatesList from "./CandidatesList";
+import { log } from "console";
 
 interface Props {
   currentData: Programme[];
@@ -15,17 +16,81 @@ interface Props {
 
 const BulkUploadTeamList = (props: Props) => {
   const [nameOne, setNameOne] = React.useState<string>("");
+  const [bulkData, setBulkData] = React.useState<any[]>([]
+  );
+  const [sortedData, setSortedDAta] = React.useState<Programme[]>(props.currentData)
+  const [storedData , setStoredDate] = React.useState(null)
 
-  const handleInputChange = (index: number, event: any) => {
-    // Handle input changes if needed
+  useEffect(() => {
+
+    setSortedDAta(props.currentData.sort((a, b) => (a.id as number) -( b.id as number) )as Programme[]);
+
+    const dt = JSON.parse(localStorage.getItem('list-data') as string)
+    setStoredDate(dt)
+    return () => {
+
+    }
+  }, [])
+
+
+  const handleInputChange = (index: number , ind : number , event: any,item:any) => {
+        
+    const {programCode,...others} =item
+
+    const match =  bulkData.find((item) => item.index === ind && item.programCode === programCode)  
+
+    if(match){
+      const data = bulkData.map((item) => {
+        if(item.index === ind && item.programCode === programCode){
+          return  {...item, chestNO : event.target.value}
+        }
+        return item
+      })
+      setBulkData(data)
+      localStorage.setItem('list-data',JSON.stringify(data))
+    }else{
+      setBulkData([ ...bulkData , { programCode, chestNO : event.target.value , index: ind }])
+
+    }
   };
+
+  // Needed ------------------------------------------
+
+  // candidates of programme that have already applied 
+  // edit option for them 
+  // set view only when controller disabled it
+
+  const handleClick=()=>{
+    // delete all date which chestNo is empty
+
+    const data = bulkData.filter((item) => item.chestNO !== "")
+
+    const dats = inputValidator()
+
+    localStorage.removeItem('list-data')
+    console.log(dats);
+  }
+
+  const inputValidator = () => {
+    // check all chestNo are 4 letters and first one string and last three numbers
+
+    const valuatedData = bulkData.filter((item)=>{
+      const firstLetter = item.chestNO[0]
+      const lastThree = item.chestNO.slice(1,4)
+      const isNumber = Number(lastThree)
+      if(firstLetter && lastThree && isNumber){
+        return item
+      }
+    })
+
+    return valuatedData
+  }
 
   return (
     <div className="flex h-[65vh] overflow-y-scroll overflow-x-hidden">
       <div
-        className={`grid  gap-4 w-full transition-all ${
-          props.IsRightSideBarOpen ? "grid-cols-3" : "grid-cols-4"
-        }`}
+        className={`grid  gap-4 w-full transition-all ${props.IsRightSideBarOpen ? "grid-cols-3" : "grid-cols-4"
+          }`}
       >
         {props.currentData?.map((item: Programme, index: number) => {
           return (
@@ -54,26 +119,36 @@ const BulkUploadTeamList = (props: Props) => {
                   {
                     //  create inputs as much as the candidate count the candidate count is the number of inputs get from item.candidateCount
 
-                    [...Array(item.candidateCount)].map((_, index) => (
+                    [...Array(item.candidateCount)].map((_, i) => (
+      
                       <div>
                         <input
+
                           key={index}
                           type="text"
                           placeholder={`Input ${index + 1}`}
+                          name=""
                           onChange={(event) => {
-                            handleInputChange(index, event);
+                            handleInputChange(index , i, event,item); 
+                            console.log(index, i,);
+                            //   console.log(props.currentData);
+                            //   console.log(sortedData);
+
+                              
+
                           }}
-                        />
+                        /> 
                       </div>
-                    // <CandidatesList/>
                     ))
                   }
                 </div>
+                
               </div>
             </div>
           );
         })}
       </div>
+      <button onClick={handleClick}>done</button>
     </div>
   );
 };

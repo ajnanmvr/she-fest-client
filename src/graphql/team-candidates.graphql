@@ -1,5 +1,5 @@
-query GetAllTeamCandidates {
-  candidates {
+query GetAllTeamCandidates ($api_key: String!){
+  candidates (api_key: $api_key){
     id
     name
     chestNO
@@ -12,8 +12,8 @@ query GetAllTeamCandidates {
   }
 }
 
-query GetOneTeamCandidate($id: Int!) {
-  candidate(id: $id) {
+query GetOneTeamCandidate($id: Int!, $api_key: String!) {
+  candidate(id: $id, api_key: $api_key) {
     id
     name
     imageId
@@ -32,8 +32,8 @@ query GetOneTeamCandidate($id: Int!) {
   }
 }
 
-query GetDetailedTeamCandidate($id: Int!) {
-  candidate(id: $id) {
+query GetDetailedTeamCandidate($id: Int!, $api_key: String!) {
+  candidate(id: $id, api_key: $api_key) {
     id
     chestNO
     candidateProgrammes {

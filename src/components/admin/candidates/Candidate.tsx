@@ -1,7 +1,7 @@
 "use client";
 import InfoBar from "@/components/admin/InfoBar";
 import RightSideBar from "@/components/admin/RightSideBar";
-import { Candidate, Category, Team } from "@/gql/graphql";
+import { Candidate, Category, Programme, Team, Types } from "@/gql/graphql";
 import { parseJwt } from "@/lib/cryptr";
 import { SERVER_URL } from "@/lib/urql";
 import { withUrqlClient } from "next-urql";
@@ -9,6 +9,12 @@ import { useEffect, useRef, useState } from "react";
 import { cacheExchange, fetchExchange } from "urql";
 import OneCandidate from "./SingleCandidate";
 import { styled } from "styled-components";
+import { ChevronLeft } from "@/icons/arrows";
+import { PageChevronLeft, PageChevronRight } from "@/icons/pagination";
+import { AddIcon, DownLoadIcon, FilterIcon } from "@/icons/action";
+import jsPDF from "jspdf";
+import { saveAs } from "file-saver";
+
 
 interface Props {
   data: {
@@ -145,9 +151,8 @@ const Candidate = (props: Props) => {
         <button
           key={page}
           onClick={() => goToPage(page)}
-          className={`${
-            currentPage === page ? "bg-secondary text-white" : "bg-[#ECE1FC]"
-          }  py-2 px-4 rounded-xl font-bold mx-1 my-5`}
+          className={`${currentPage === page ? "bg-secondary text-white" : "bg-[#ECE1FC]"
+            }  py-2 px-4 rounded-xl font-bold mx-1 my-5`}
         >
           {page}
         </button>
@@ -176,6 +181,69 @@ const Candidate = (props: Props) => {
     a.click();
   }
 
+  const downloadProgrameList = (programme: any = currentData, bulk: boolean = true) => {
+    const doc = new jsPDF("portrait", "px", "a4");
+    console.log(programme);
+    console.log(data);
+    console.log(allData);
+    
+    
+
+
+    // Load Montserrat font
+    doc.addFont(
+      "https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm459Wlhzg.ttf",
+      "Montserrat",
+      "normal"
+    );
+
+    const pdfWidth = doc.internal.pageSize.getWidth();
+    const pdfHeight = doc.internal.pageSize.getHeight();
+
+    const backgroundImageUrl = "/a4program.jpg";
+
+    console.log("pdf", pdfWidth, pdfHeight);
+    var program = programme
+    program.forEach((a: any) => {
+      doc.addPage("a4");
+
+
+      // Add the background image
+      doc.addImage(backgroundImageUrl, "JPEG", 0, 0, pdfWidth, pdfHeight);
+
+      // Set the font to Montserrat
+      doc.setFont("Montserrat");
+
+      // Add text and other content on top of the background image
+      doc.setFontSize(10);
+      doc.setTextColor(0, 0, 0); // Set text color to black
+
+      doc.text(`${a.chestNO}`, 110, 205);
+      doc.text(`${a.name}`, 110, 218);
+      doc.text(`${a.team?.name}`, 345, 205);
+      doc.text(`${a.category?.name}`, 345, 218);
+      var aa = 250;
+
+      a.candidateProgrammes?.map((item: any, i: number) => {
+        aa = aa + 15;
+        console.log(aa);
+
+        doc.text(`${item.programme?.programCode}`, 67, aa);
+        doc.text(`${item.programme?.name}`, 126, aa);
+      });
+    });
+    doc.deletePage(1)
+
+    const pdfBlob = doc.output("blob");
+    // var filename = bulk ? `Judge-List` : `${(programme as any).programCode} ${(programme as any).name}`
+    saveAs(pdfBlob, `${programme.length}.pdf`);
+    // setDowloading(true)
+  };
+
+  // console.log(allData);
+
+
+
   return (
     <>
       <div className="w-full h-full">
@@ -198,19 +266,41 @@ const Candidate = (props: Props) => {
                     allData.filter((item: any) =>
                       item.name
                         .toLocaleLowerCase()
+                        .includes(e.target.value.toLocaleLowerCase()) ||
+                      item.chestNO
+                        .toLocaleLowerCase()
                         .includes(e.target.value.toLocaleLowerCase())
                     )
                   );
                 }}
               />
 
-              <div>
+              <div className=" flex items-center">
                 <div className="dropdown dropdown-end">
                   <label
                     tabIndex={0}
-                    className="inline-flex bg-secondary text-white rounded-full px-5 py-2 font-bold"
+                    className="hidden md:inline-flex bg-secondary text-white rounded-full px-5 py-2 font-bold"
                   >
                     Add
+                    <svg
+                      className="-mr-1 h-5 w-5 text-gray-400"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </label>
+
+                  <label
+                    tabIndex={0}
+                    className="md:hidden inline-flex bg-secondary text-white rounded-full px-4 py-[6px] font-bold"
+                  >
+                    <AddIcon className="w-7 h-7 fill-white cursor-pointer" />
                     <svg
                       className="-mr-1 h-5 w-5 text-gray-400"
                       viewBox="0 0 20 20"
@@ -268,26 +358,104 @@ const Candidate = (props: Props) => {
                     </button>
                   </ul>
                 </div>
-                <button
-                  className="ml-1 bg-secondary text-white rounded-full px-5 py-2 font-bold"
+{/* export option */}
+                {/* <button
+                  className="hidden md:block ml-1 bg-secondary text-white rounded-full px-5 py-2 font-bold"
                   onClick={downloadExcel}
                 >
                   Export
+                </button> */}
+                <button
+                  className="ml-1 bg-secondary text-white rounded-full px-5 py-2 font-bold md:hidden"
+                  onClick={downloadExcel}
+                >
+                  <DownLoadIcon className="w-6 h-6 cursor-pointer fill-white  transition-all" />
                 </button>
+
+
+                {/* filtering option */}
+                <div className="dropdown dropdown-end mr-1">
+                    <label
+                      tabIndex={0}
+                      className="hidden md:inline-flex bg-secondary ml-1  text-white rounded-full px-5 py-2 font-bold"
+                    >
+                      Filter
+                      <svg
+                        className="-mr-1 h-5 w-5 text-gray-400"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </label>
+
+                    <label
+                      tabIndex={0}
+                      className="md:hidden inline-flex bg-secondary ml-1  text-white rounded-full px-5 py-2 font-bold"
+                    >
+                     <FilterIcon className="w-7 h-7 fill-white cursor-pointer"/>
+                      <svg
+                        className="-mr-1 h-5 w-5 text-gray-400"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </label>
+                    <ul
+                      tabIndex={0}
+                      className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-40 font-bold"
+                    >
+                      {props.categories?.map((item: Category, index: number) => {
+                        return (
+                          <button
+                            className=" block px-2 py-1 text-md rounded-md hover:bg-secondary hover:text-white"
+                            onClick={() => {
+                              setCurrentPage(1);
+                              setData(
+                                allData.filter(
+                                  (itm: any) =>
+                                    itm?.category?.name?.toLocaleLowerCase() ===
+                                    item?.name?.toLocaleLowerCase()
+                                )
+                              );
+                            }}
+                          >
+                            {item.name}
+                          </button>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                  {/* download option */}
+                <button
+                  className="hidden md:block ml-1 bg-secondary text-white rounded-full px-5 py-2 font-bold"
+                  onClick={() => downloadProgrameList(data)}
+                >
+                  Export
+                </button>
+
               </div>
             </div>
             <div className="flex flex-col items-center lg:justify-center w-full h-full">
               <ComponentsDiv
-                height={`${
-                  (itemsPerPage / (IsRightSideBarOpen ? 3 : 4)) * 6
-                }rem`}
+                height={`${(itemsPerPage / (IsRightSideBarOpen ? 3 : 4)) * 6
+                  }rem`}
               >
-
                 <div
                   ref={candidateRef}
-                  className={`grid gap-4 w-full transition-all grid-cols-1 ${
-                    IsRightSideBarOpen ? "lg:grid-cols-3" : "lg:grid-cols-4"
-                  }`}
+                  className={`grid gap-4 w-full transition-all grid-cols-1 ${IsRightSideBarOpen ? "lg:grid-cols-3" : "lg:grid-cols-4"
+                    }`}
                 >
                   {currentData?.map((item: Candidate, index: number) => {
                     return (
@@ -296,7 +464,7 @@ const Candidate = (props: Props) => {
                         className="transition-all bg-[#EEEEEE] rounded-xl mt-[1%] cursor-pointer flex p-5 gap-3 content-center items-center h-20"
                         onClick={() => {
                           setIsRightSideBarOpen(true);
-                          setSelectedCandidate(item); 
+                          setSelectedCandidate(item);
                           setIsEdit(false);
                           setIsCreate(false);
                           setExcel(false);
@@ -308,7 +476,7 @@ const Candidate = (props: Props) => {
                         </div>
 
                         <p className="text-black leading-5 pr-[10%]">
-                          {item.name} Muhammad P
+                          {item.name}
                         </p>
                       </div>
                     );
@@ -316,7 +484,34 @@ const Candidate = (props: Props) => {
                 </div>
               </ComponentsDiv>
               <div className="w-full flex items-center justify-center">
-                {renderPaginationControls()}
+                <button
+                  key={1}
+                  onClick={() => {
+                    currentPage != 1 && goToPage(currentPage - 1)
+                  }}
+                  className={`${"bg-[#ECE1FC]"
+                    }  py-2 px-2  rounded-xl font-bold mx-1 my-5`}
+                >
+                  {
+                    <PageChevronLeft className="w-6 h-6 fill-secondary" />
+                  }
+                </button>
+                <button
+                  key={1}
+                  className={`${"bg-secondary text-white"
+
+                    }  py-2 px-4 rounded-xl font-bold mx-1 my-5`}
+                >
+                  {currentPage}
+                </button>
+                <button
+                  key={1}
+                  onClick={() => totalPages > currentPage && goToPage(currentPage + 1)}
+                  className={`${"bg-[#ECE1FC]"
+                    }  py-2 px-2  rounded-xl font-bold mx-1 my-5`}
+                >
+                  <PageChevronRight className="w-6 h-6 fill-secondary" />
+                </button>
               </div>
             </div>
           </div>

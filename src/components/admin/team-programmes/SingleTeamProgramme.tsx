@@ -16,6 +16,7 @@ import {
 import { useState } from "react";
 import { OperationResult, useMutation, useQuery } from "urql";
 import ViewProgramme from "./ViewTeamProgramme";
+import { API_KEY } from "@/lib/env";
 
 interface Props {
   id: number;
@@ -46,6 +47,7 @@ const OneTeamProgramme = (props: Props) => {
   >({
     query: GetOneProgrammeDocument,
     variables: {
+      api_key: API_KEY,
       id: props.id,
     },
     pause: props.isCreate || props.isEdit,

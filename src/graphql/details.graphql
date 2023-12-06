@@ -1,5 +1,5 @@
-query getSettings {
-  details{
+query getSettings ($api_key: String!){
+  details (api_key: $api_key){
     name
     logoId
     id

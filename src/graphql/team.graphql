@@ -1,12 +1,24 @@
-query GetAllTeams {
-  teams {
+query GetAllTeams ($api_key: String!){
+  teams (api_key: $api_key) {
     id
     name
+    totalPoint
+    totalSportsPoint
+    color
   }
 }
 
-query GetOneTeam($id: Int!) {
-  team(id: $id) {
+query GetAllTeamsByPoint ($api_key: String!){
+  teams (api_key: $api_key) {
+    id
+    name
+    totalPoint
+    color
+  }
+}
+
+query GetOneTeam($id: Int!, $api_key: String!) {
+  team(id: $id, api_key: $api_key) {
     id
     name
     description

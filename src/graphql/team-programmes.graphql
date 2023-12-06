@@ -1,5 +1,5 @@
-query GetAllTeamProgrammes {
-  programmes {
+query GetAllTeamProgrammes ($api_key: String!){
+  programmes (api_key: $api_key) {
     id
     name
     programCode
@@ -12,8 +12,8 @@ query GetAllTeamProgrammes {
   }
 }
 
-query GetDetailedTeamProgramme($id: Int!) {
-  programme(id: $id) {
+query GetDetailedTeamProgramme($id: Int!, $api_key: String!) {
+  programme(id: $id, api_key: $api_key) {
     candidateProgramme {
       candidate {
         name
@@ -26,8 +26,8 @@ query GetDetailedTeamProgramme($id: Int!) {
   }
 }
 
-query GetOneTeamProgramme($id: Int!) {
-  programme(id: $id) {
+query GetOneTeamProgramme($id: Int!, $api_key: String!) {
+  programme(id: $id, api_key: $api_key) {
     id
     name
     resultPublished

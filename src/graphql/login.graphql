@@ -33,9 +33,13 @@ query CheckLoggedIn {
   }
 }
 
-query GetAdmins {
-  sections{
+query GetAdmins ($api_key: String!){
+  sections (api_key: $api_key) {
     id
     name
   }
+}
+
+mutation LogOutUser {
+  logout
 }

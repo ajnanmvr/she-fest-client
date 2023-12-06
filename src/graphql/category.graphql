@@ -1,12 +1,12 @@
-query GetAllCategories {
-  categories {
+query GetAllCategories ($api_key: String!){
+  categories(api_key: $api_key) {
     id
     name
   }
 }
 
-query GetOneCategory($id: Int!) {
-  category(id: $id) {
+query GetOneCategory($id: Int! , $api_key: String!) {
+  category(id: $id , api_key: $api_key) {
     id
     name
     section {

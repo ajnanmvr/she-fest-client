@@ -19,6 +19,7 @@ import EditProgramme from "./EditResult";
 import CreateProgramme from "./CreateResult";
 import ViewProgramme from "./ViewResult";
 import ExcelUploadProgramme from "./ExcelUploadResult";
+import { API_KEY } from "@/lib/env";
 
 interface Props {
   id: number;
@@ -51,6 +52,7 @@ const OneResult = (props: Props) => {
     query: GetOneProgrammeDocument,
     variables: {
       id: props.id,
+      api_key : API_KEY
     },
     pause: props.isCreate || props.isEdit,
   });

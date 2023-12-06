@@ -170,6 +170,8 @@ const TeamProgramme = (props: Props) => {
       </div>
       <RightSideBar
         key={1}
+        isCreate={isCreate}
+        isEdit={isEdit}
         isOpen={IsRightSideBarOpen}
         setIsOpen={setIsRightSideBarOpen}
       >

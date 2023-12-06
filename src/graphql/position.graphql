@@ -1,13 +1,13 @@
-query GetAllPositions {
-  positions {
+query GetAllPositions ($api_key: String!){
+  positions (api_key: $api_key) {
     id
     name
     value
   }
 }
 
-query GetOnePosition($id: Int!) {
-  position(id: $id) {
+query GetOnePosition($id: Int!, $api_key: String!) {
+  position(id: $id, api_key: $api_key) {
     id
     name
     value

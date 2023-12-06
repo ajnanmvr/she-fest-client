@@ -4,6 +4,7 @@ interface Props {
   data: {
     title: string;
     icon: any;
+    value?: number;
   }[];
 } 
 
@@ -23,7 +24,7 @@ const InfoBar = (props: Props) => {
           </svg>
           <div>
             <p className="text-lg font-light">{item.title}</p>
-            <p className="text-4xl font-extrabold	text-secondary ">3650</p>
+            <p className="text-4xl font-extrabold	text-secondary ">{item.value || 0 }</p>
           </div>
         </div>
       ))}

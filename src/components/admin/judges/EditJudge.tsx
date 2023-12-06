@@ -1,5 +1,6 @@
 import {  Category, EditProgrammeDocument, EditProgrammeMutation, EditProgrammeMutationVariables, Mode, Model, Programme, Skill, Type } from '@/gql/graphql';
 import React from 'react'
+import { toast } from 'react-toastify';
 import { OperationResult, useMutation } from 'urql';
 
 interface Props {
@@ -64,7 +65,7 @@ const EditProgramme = (props : Props) => {
       console.log(updatedData);
   
       if (updatedData.data?.updateProgramme) {
-        alert("Programme Updated");  
+        toast.success("Programme Updated Successfully");
         const updatedDates = props.data.map((value , index)=>{
           if(value.id == updatedData.data?.updateProgramme?.id){
           return  value = updatedData.data?.updateProgramme as Programme
@@ -76,10 +77,10 @@ const EditProgramme = (props : Props) => {
   
       props.setData(updatedDates as Programme[]);
       } else if(updatedData.error?.message) {
-        alert(updatedData.error?.message.split(']')[1]);
+        updatedData.error?.message.split("]")[1].startsWith(" target") ? toast.error("server error") : toast.error(updatedData.error?.message.split("]")[1]);
       }
       else {
-          alert("Programme Not Updated");
+          toast.error("Programme Not Updated");
         }
       setIsLoading(false);
       props.setIsEdit(false);

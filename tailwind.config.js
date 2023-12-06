@@ -15,6 +15,22 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      screens: {
+        bigphone: "425px",
+      },
+      borderRadius: {
+        big: "2rem",
+        large: "4rem",
+        xlarge: "5rem",
+      },
+      fontSize: {
+        lt: "12px",
+        tn: "9px",
+      },
+      transitionTimingFunction: {
+        "slow-to-speed":
+          "cubic-bezier(0.73, 0, 0, 1)",
+      },
     },
   },
   plugins: [require("daisyui")],
@@ -28,10 +44,10 @@ module.exports = {
           fourth: "#EEEEEE",
           neutral: "#2b3440",
           "base-100": "#ffffff",
-          info: "#3abff8",
-          success: "#36d399",
-          warning: "#fbbd23",
-          error: "#f87272",
+          info: "#1A8181",
+          success: "#127A29",
+          warning: "#DBC712",
+          error: "#7A1212",
         },
       },
     ],

@@ -2,6 +2,9 @@
 
 import {
   Exact,
+  LogOutUserDocument,
+  LogOutUserMutation,
+  LogOutUserMutationVariables,
   LoginUserDocument,
   LoginUserMutation,
   LoginUserMutationVariables,
@@ -12,9 +15,6 @@ import { Login } from "@/types/login";
 import { cookies } from "next/headers";
 import { OperationResult } from "urql";
 export const login = async (token : string) => {
-
-
-    console.log("login");
     
     try{
       cookies().set({
@@ -30,3 +30,12 @@ export const login = async (token : string) => {
     }
 
 };
+const { client } = getUrqlClient();
+export const logoutUser =async ()=>{
+
+  const categories = await client.mutation<
+    LogOutUserMutation,
+    LogOutUserMutationVariables
+  >(LogOutUserDocument, {});
+
+}

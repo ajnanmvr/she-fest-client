@@ -1,12 +1,12 @@
-query GetAllSkills {
-  skills {
+query GetAllSkills ($api_key: String!){
+  skills (api_key: $api_key) {
     id
     name
   }
 }
 
-query GetOneSkill($id: Int!) {
-  skill(id: $id) {
+query GetOneSkill($id: Int!, $api_key: String!) {
+  skill(id: $id, api_key: $api_key) {
     id
     name
     description

@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import { OperationResult, useMutation, useQuery } from "urql";
 import ViewCandidate from "./ViewTeamCandidate";
+import { API_KEY } from "@/lib/env";
 
 interface Props {
   id: number;
@@ -44,6 +45,7 @@ const OneTeamCandidate = (props: Props) => {
   >({
     query: GetOneCandidateDocument,
     variables: {
+      api_key: API_KEY,
       id: props.id,
     },
     pause: props.isCreate || props.isEdit || props.isExcelUpload,

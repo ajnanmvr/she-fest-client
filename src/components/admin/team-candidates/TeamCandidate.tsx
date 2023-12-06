@@ -171,6 +171,8 @@ const TeamCandidate = (props: Props) => {
       </div>
       <RightSideBar
         key={1}
+        isEdit={isEdit}
+        isCreate={isCreate}
         isOpen={IsRightSideBarOpen}
         setIsOpen={setIsRightSideBarOpen}
       >

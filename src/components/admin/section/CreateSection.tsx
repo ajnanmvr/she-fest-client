@@ -1,4 +1,5 @@
 "use client";
+import Alert from "@/components/Alert";
 import {
   AddSectionDocument,
   AddSectionMutation,
@@ -9,14 +10,18 @@ import { addSectionSchema } from "@/types/section";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { OperationResult, useMutation } from "urql";
 
 interface Props {
   data: Section[];
   setData: React.Dispatch<React.SetStateAction<Section[]>>;
+  isOpen: boolean;
 }
 
 const CreateSection = (props: Props) => {
+  const [isError, setIsError] = React.useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = React.useState<boolean>(false);
   const [name, setName] = React.useState<string>("");
   const [state, CreateSectionExecute] = useMutation(AddSectionDocument);
 
@@ -29,10 +34,10 @@ const CreateSection = (props: Props) => {
     });
 
     if (datas.data?.createSection) {
-      alert("Section Added");
+      toast.success("Section Added");
       props.setData([...props.data, datas.data?.createSection as Section]);
-    } else {
-      alert("Section Not Added");
+    } else{
+      datas.error?.message.split("]")[1].startsWith(" target") ? toast.error("server error") : toast.error(datas.error?.message.split("]")[1]);
     }
   };
 
@@ -69,6 +74,9 @@ const CreateSection = (props: Props) => {
           ></div>
         </div>
       </form>
+      <Alert isError={isError} setError={setIsError} isSuccess={isSuccess}>
+
+      </Alert>
     </div>
   );
 };
