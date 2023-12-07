@@ -1,4 +1,4 @@
-export const API_KEY = "123"
+export const API_KEY = "abc"
 // "AZzPkqAAYcUFw53bT4CAb5PQ7Ndby7f9Qn4jnDyVk5GkCv2e896mqAwDTQH8z9rk0p8F";
 export const FIREBASE_CONFIG = {
     apiKey: "AIzaSyBMGNBX-KupzueYhF6AejYV1VOM-d2BlBU",
