@@ -25,7 +25,7 @@ export default async function Page() {
 
   return (
     <div>
-      {/* <Programs pageProps={1} categories={categories.data?.categories as Category[]}  programmes={programmes.data?.programmes as Programme[] } /> */}
+      <Programs pageProps={1} categories={categories.data?.categories as Category[]}  programmes={programmes.data?.programmes as Programme[] } />
     </div>
   );
 }
