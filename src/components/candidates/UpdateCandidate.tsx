@@ -1,16 +1,23 @@
-import { Candidate, Category, EditCandidateDocument, EditCandidateMutation, EditCandidateMutationVariables, Team } from '@/gql/graphql';
-import React from 'react'
-import { OperationResult, useMutation } from 'urql';
+import {
+  Candidate,
+  Category,
+  EditCandidateDocument,
+  EditCandidateMutation,
+  EditCandidateMutationVariables,
+  Team,
+} from "@/gql/graphql";
+import React from "react";
+import { OperationResult, useMutation } from "urql";
 interface Props {
-  isUpdate : boolean
-  setIsUpdate : React.Dispatch<React.SetStateAction<boolean>>;
-  candidates : Candidate[];
-  setCandidates : React.Dispatch<React.SetStateAction<Candidate[]>>;
-  selected : Candidate | null;
+  isUpdate: boolean;
+  setIsUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+  candidates: Candidate[];
+  setCandidates: React.Dispatch<React.SetStateAction<Candidate[]>>;
+  selected: Candidate | null;
   categories: Category[];
   teams: Team[];
 }
-const UpdateCandidate = (props:Props) => {
+const UpdateCandidate = (props: Props) => {
   const [state, UpdateCandidateExecute] = useMutation(EditCandidateDocument);
   const [name, setName] = React.useState<string>("");
   const [category, setCategory] = React.useState<string>("");
@@ -43,9 +50,7 @@ const UpdateCandidate = (props:Props) => {
           e.preventDefault();
           HandleSubmit();
         }}
-        className={
-          ` ${props.isUpdate ? "block" : "hidden"} ` 
-        }
+        className={` ${props.isUpdate ? "block" : "hidden"} `}
       >
         <p>Chest Nom</p>
         <input
@@ -111,6 +116,6 @@ const UpdateCandidate = (props:Props) => {
       </form>
     </>
   );
-}
+};
 
-export default UpdateCandidate
+export default UpdateCandidate;

@@ -56,7 +56,7 @@ const CreateCandidate = (props: Props) => {
             HandleSubmit();
           }}
           className={`p-3 text-left`}
-        >
+          >
           <p className="text-sm mt-3 font-bold text-primary">Chest No</p>
           <input
             type="text"

@@ -181,9 +181,6 @@ export type CreateGradeInput = {
   pointSingle: Scalars['Int']['input'];
 };
 
-export type CreateInput = {
-  inputs: Array<CreateCandidateInput>;
-};
 
 export type CreateManyCp = {
   inputs: Array<CreateCandidateProgrammeInput>;
