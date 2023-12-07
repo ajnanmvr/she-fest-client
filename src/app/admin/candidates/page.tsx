@@ -17,7 +17,7 @@ export default async function Page() {
   console.log(result.data?.candidates);
 
   return (
-    <div className="h-screen w-screen bg-smoke flex flex-col p-10">
+    <div>
       <button className="bg-primary w-1/6 self-end">Create Candidate</button>
       <Candidates candidates={candidates}/>
     </div>
