@@ -44,77 +44,73 @@ const UpdateCandidate = (props: Props) => {
   };
 
   return (
-    <>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          HandleSubmit();
-        }}
-        className={` ${props.isUpdate ? "block" : "hidden"} `}
-      >
-        <p>Chest Nom</p>
-        <input
-          type="text"
-          placeholder="Type here"
-          className="input input-bordered input-secondary w-full max-w-xs"
-          value={chestNO}
-          onChange={(e) => setChestNO(e.target.value)}
-        />
-        <p>Name</p>
-        <input
-          type="text"
-          placeholder="Type here"
-          className="input input-bordered input-secondary w-full max-w-xs"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <p>Category</p>
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="select select-secondary w-full max-w-xs h-8"
-        >
-          {" "}
-          <option value={"none"}>select catogory</option>
-          {props.categories.map((value, index) => {
-            return (
-              <option key={index} value={value.name as string}>
-                {value.name}
-              </option>
-            );
-          })}
-        </select>
-        <p>Team</p>
-        <select
-          value={team}
-          onChange={(e) => setTeam(e.target.value)}
-          className="select select-secondary w-full max-w-xs h-8"
-        >
-          <option value={"none"}>select team</option>
-          {props.teams.map((value, index) => {
-            return (
-              <option key={index} value={value.name as string}>
-                {value.name}
-              </option>
-            );
-          })}
-        </select>
-
-        <div className="w-full  mt-4 flex items-center justify-between">
-          <button
-            type="submit"
-            className="bg-secondary w-1/2 border-2 text-white px-3 flex-1 py-2 border-secondary rounded-xl font-bold"
+    <div
+      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center  items-center  ${
+        props.isUpdate ? 'block' : 'hidden'
+      } `}
+    >
+      <div className="bg-white p-3 rounded-xl flex flex-col items-center max-w-[400px] text-center">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            HandleSubmit();
+          }}
+          className={`p-3 text-left`}
           >
-            {state.fetching ? "Loading..." : "Submit"}
+          <p className="text-sm mt-3 font-bold text-primary">Chest No</p>
+          <input
+            type="text"
+            className="border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            value={chestNO}
+            onChange={(e) => setChestNO(e.target.value)}
+            placeholder={`Chest Name`}
+          />
+          <p className="text-sm mt-3 font-bold text-primary">Name</p>
+          <input
+            type="text"
+            className="border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder={`Name`}
+          />
+          <p className="text-sm mt-3 font-bold text-primary">Category</p>
+          <select
+            className="border-2  border-primary rounded-md placeholder:text-sm p-2 w-full"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="">Select Category</option>
+            {props.categories.map((category, index) => (
+              <option key={index} value={category.name as string}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <p className="text-sm mt-3 font-bold text-primary">Team</p>
+          <select
+            className="border-2  border-primary rounded-md placeholder:text-sm p-2 w-full"
+            value={team}
+            onChange={(e) => setTeam(e.target.value)}
+          >
+            <option value="">Select Team</option>
+            {props.teams.map((team, index) => (
+              <option key={index} value={team.name as string}>
+                {team.name}
+              </option>
+            ))}
+          </select>
+          <button className="w-full bg-primary text-white font-bold px-3 py-2 rounded-lg mt-3">
+            Submit
           </button>
-
-          <div
-            className="w-1/2 flex items-center justify-center tooltip"
-            data-tip="Back"
-          ></div>
-        </div>
-      </form>
-    </>
+        </form>
+        <button
+          className="bg-red-700 text-white font-bold px-3 py-2 rounded-lg"
+          onClick={() => props.setIsUpdate(false)}
+        >
+          Close
+        </button>
+      </div>
+    </div>
   );
 };
 

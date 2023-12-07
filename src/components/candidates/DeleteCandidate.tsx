@@ -3,9 +3,9 @@ import {
   DeleteCandidateDocument,
   DeleteCandidateMutation,
   DeleteCandidateMutationVariables,
-} from "@/gql/graphql";
-import React from "react";
-import { OperationResult, useMutation } from "urql";
+} from '@/gql/graphql';
+import React from 'react';
+import { OperationResult, useMutation } from 'urql';
 interface Props {
   isDelete: boolean;
   setIsDelete: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,7 +24,6 @@ function DeleteCandidate(props: Props) {
     > = await DeleteCandidateExecute({
       id: props.selected?.id as number,
     });
-
     if (deletedData.data?.removeCandidate?.__typename) {
       const deleted = props.candidates.filter((value, index) => {
         return value.id !== props.selected?.id;
@@ -36,8 +35,31 @@ function DeleteCandidate(props: Props) {
   };
 
   return (
-    <div>
-      <button onClick={() => [HandleDelete()]}>Delete</button>
+    <div
+      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center  items-center  ${
+        props.isDelete ? 'block' : 'hidden'
+      } `}
+    >
+      <div className="p-5 bg-white rounded-xl gap-4">
+      <p className='text-center text-lg'>
+        Are you sure, do you want to delete candidate{' '}
+        <span className="font-bold">{props.selected?.name}</span>?
+      </p>
+      <div className='w-full flex justify-center gap-2 mt-2'>
+        <button
+          className="bg-primary text-white py-1 px-2 rounded-md text-base"
+          onClick={() => props.setIsDelete(false)}
+        >
+          Cancel
+        </button>
+        <button
+          className="bg-red-500 text-white py-1 px-2 rounded-md text-base"
+          onClick={() => HandleDelete()}
+        >
+          Delete
+        </button>
+      </div>
+      </div>
     </div>
   );
 }
