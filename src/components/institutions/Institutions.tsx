@@ -1,11 +1,13 @@
 "use client";
-import { Team } from "@/gql/graphql";
+import { Team, Zone } from "@/gql/graphql";
 import { SERVER_URL } from "@/lib/urql";
 import { withUrqlClient } from "next-urql";
 import { useState } from "react";
 import { cacheExchange, fetchExchange } from "urql";
+import CreateTeam from "./CreateInstitution";
 interface Props {
   teams: Team[];
+  zones : Zone[]
 }
 function Institutions(props: Props) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,7 +67,7 @@ function Institutions(props: Props) {
                 onClick={() => setSelected(institution)}
               >
                 <h1 className="px-2 py-1 bg-primary inline rounded-lg text-white font-semibold">
-                  {institution.zone?.name}
+                  {institution.zone?.name ? institution.zone?.name : "NIL"}
                 </h1>
                 <p className="line-clamp-2 h-12">{institution.name}</p>
                 <div className="flex w-full justify-between">
@@ -113,6 +115,30 @@ function Institutions(props: Props) {
           </div>
         </div>
       </div>
+
+      <CreateTeam
+      isCreate={isCreate}
+      setIsCreate={setIsCreate}
+      teams={institutions}
+      setTeams={setInstitutions}
+      zones={props.zones}
+      />
+      {/* <UpdateTeam
+        candidates={candidates}
+        setTeams={setTeams}
+        isUpdate={isUpdate}
+        setIsUpdate={setIsUpdate}
+        selected={selected}
+        categories={props.categories}
+        teams={props.teams}
+      />
+      <DeleteTeam
+        candidates={candidates}
+        setTeams={setTeams}
+        isDelete={isDelete}
+        setIsDelete={setIsDelete}
+        selected={selected}
+      /> */}
   </>;
 }
 export default withUrqlClient(() => ({

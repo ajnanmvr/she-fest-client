@@ -1,6 +1,6 @@
 import Candidates from "@/components/candidates/Candidates";
 import Institutions from "@/components/institutions/Institutions";
-import { GetAllTeamsDocument, GetAllTeamsQuery, GetAllTeamsQueryVariables, Team } from "@/gql/graphql";
+import { GetAllTeamsDocument, GetAllTeamsQuery, GetAllTeamsQueryVariables, GetAllZonesDocument, GetAllZonesQuery, GetAllZonesQueryVariables, Team, Zone } from "@/gql/graphql";
 import { API_KEY } from "@/lib/env";
 import { getUrqlClient } from "@/lib/urql";
 
@@ -14,9 +14,17 @@ export default async function Page() {
     api_key: API_KEY,
   });
 
+  const zones = await client.query<
+  GetAllZonesQuery,
+  GetAllZonesQueryVariables
+>(GetAllZonesDocument, {
+});
+
+
+
   return (
     <div>
-      <Institutions pageProps={1} teams = {teams.data?.teams as Team[]}/>
+      <Institutions pageProps={1} teams = {teams.data?.teams as Team[]} zones = {zones.data?.zones as Zone[]}/>
     </div>
   );
 }

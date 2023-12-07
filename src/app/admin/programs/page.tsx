@@ -5,7 +5,7 @@ import { getUrqlClient } from "@/lib/urql";
 
 export default async function Page() {
   const { client } = getUrqlClient();
-
+  
   const programmes = await client.query<
     GetAllProgrammesQuery,
     GetAllProgrammesQueryVariables
