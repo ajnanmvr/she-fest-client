@@ -16,11 +16,6 @@ query GetOneTeamCandidate($id: Int!, $api_key: String!) {
   candidate(id: $id, api_key: $api_key) {
     id
     name
-    imageId
-    dob
-    class
-    adno
-    gender
     individualPoint
     groupPoint
     category {
@@ -44,13 +39,31 @@ query GetDetailedTeamCandidate($id: Int!, $api_key: String!) {
         programCode
         name
       }
-      grade {
-        id
+      finalgrade {
         name
+        pointGroup
+        pointSingle
+        pointHouse
       }
-      position {
-        id
+      finalposition {
         name
+        value
+        pointGroup
+        pointSingle
+        pointHouse
+      }
+      zonalgrade {
+        name
+        pointGroup
+        pointSingle
+        pointHouse
+      }
+      zonalposition {
+        name
+        value
+        pointGroup
+        pointSingle
+        pointHouse
       }
       candidatesOfGroup {
         id

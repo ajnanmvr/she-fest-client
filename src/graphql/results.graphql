@@ -10,6 +10,3 @@ mutation PublishResult($programCodes: String!) {
   publishResult(programmeCode: $programCodes)
 }
 
-mutation GoLive($programCodes: [String!]!  $timeInSec : Float!) {
-  liveResult(programmeCode: $programCodes , timeInSec:$timeInSec )
-}

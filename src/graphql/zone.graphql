@@ -1,0 +1,35 @@
+query GetAllCategories ($api_key: String!){
+  zones(){
+    id
+    name
+  }
+}
+
+query GetOneZone($id: Int! , $api_key: String!) {
+  zone(id: $id , ) {
+    id
+    name
+  }
+}
+
+mutation AddZone($name: String!) {
+  createZone(createZoneInput: { name: $name, }) {
+    id
+    name
+  }
+}
+
+mutation EditZone($id: Int!, $name: String!) {
+  updateZone(
+    updateZoneInput: { id: $id, name: $name }
+  ) {
+    id
+    name
+  }
+}
+
+mutation DeleteZone($id: Int!) {
+  removeZone(id: $id) {
+    __typename
+  }
+}

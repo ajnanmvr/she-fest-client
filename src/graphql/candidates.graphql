@@ -16,8 +16,6 @@ query GetAllDetailedCandidates($api_key: String!) {
   candidates(api_key: $api_key) {
     id
     name
-    adno
-    class
     chestNO
     category {
       name
@@ -33,7 +31,6 @@ query GetAllDetailedCandidates($api_key: String!) {
       programme {
         name
         programCode
-        model
         type
         mode
       }
@@ -43,9 +40,7 @@ query GetAllDetailedCandidates($api_key: String!) {
     }
 
     groupPoint
-    groupSportsPoint
     individualPoint
-    individualSportsPoint
   }
 }
 
@@ -53,12 +48,8 @@ query GetOneCandidate($id: Int!, $api_key: String!) {
   candidate(id: $id, api_key: $api_key) {
     id
     name
-    imageId
-    class
-    adno
     chestNO
     individualPoint
-    individualSportsPoint
     groupPoint
     category {
       name
@@ -82,9 +73,7 @@ query GetCandidateByChestNo($api_key: String!, $chestNO: String!) {
       id
       name
     }
-    individualSportsPoint
     individualPoint
-    imageId
     candidateProgrammes {
       id
       programme {
@@ -94,13 +83,20 @@ query GetCandidateByChestNo($api_key: String!, $chestNO: String!) {
         programCode
         date
         name
-        model
       }
-      grade {
+      finalgrade {
         id
         name
       }
-      position {
+      finalposition {
+        id
+        name
+      }
+      zonalgrade {
+        id
+        name
+      }
+      zonalposition {
         id
         name
       }
@@ -126,11 +122,19 @@ query GetDetailedCandidate($id: Int!, $api_key: String!) {
         programCode
         name
       }
-      grade {
+      finalgrade {
         id
         name
       }
-      position {
+      finalposition {
+        id
+        name
+      }
+      zonalgrade {
+        id
+        name
+      }
+      zonalposition {
         id
         name
       }
@@ -145,10 +149,8 @@ query GetDetailedCandidate($id: Int!, $api_key: String!) {
 }
 
 mutation AddCandidate(
-  $adno: Int
   $category: String!
   $chestNO: String!
-  $class: String
   $name: String!
   $team: String!
 ) {
@@ -158,8 +160,6 @@ mutation AddCandidate(
       category: $category
       chestNO: $chestNO
       team: $team
-      class: $class
-      adno: $adno
     }
   ) {
     id
@@ -191,21 +191,17 @@ mutation AddManyCandidates($inputs: [CreateCandidateInput!]!) {
 mutation EditCandidate(
   $id: Int!
   $name: String!
-  $adno: Int
   $category: String
   $chestNO: String
   $team: String
-  $class: String
 ) {
   updateCandidate(
     updateCandidateInput: {
       id: $id
       name: $name
-      adno: $adno
       category: $category
       chestNO: $chestNO
       team: $team
-      class: $class
     }
   ) {
     id
@@ -233,7 +229,6 @@ query CategorBasedToppers{
     candidates{
       chestNO
       name
-      imageId
       category{
         name
       }
@@ -244,6 +239,3 @@ query CategorBasedToppers{
   }
 }
 
-# mutation fjsakl{
-#   # createCandidateProgramme
-# }

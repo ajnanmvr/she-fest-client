@@ -6,9 +6,6 @@ query GetAllTeamProgrammes ($api_key: String!){
     category {
       name
     }
-    skill {
-      name
-    }
   }
 }
 
@@ -22,7 +19,6 @@ query GetDetailedTeamProgramme($id: Int!, $api_key: String!) {
     }
     resultPublished
     programCode
-    model
   }
 }
 
@@ -32,14 +28,10 @@ query GetOneTeamProgramme($id: Int!, $api_key: String!) {
     name
     resultPublished
     programCode
-    model
     duration
     candidateCount
     groupCount
     category {
-      name
-    }
-    skill {
       name
     }
     type

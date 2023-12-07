@@ -9,23 +9,19 @@ query GetOneCategory($id: Int! , $api_key: String!) {
   category(id: $id , api_key: $api_key) {
     id
     name
-    section {
-      id
-      name
-    }
   }
 }
 
-mutation AddCategory($name: String!, $section: String!) {
-  createCategory(createCategoryInput: { name: $name, section: $section }) {
+mutation AddCategory($name: String!) {
+  createCategory(createCategoryInput: { name: $name, }) {
     id
     name
   }
 }
 
-mutation EditCategory($id: Int!, $name: String!, $section: String!) {
+mutation EditCategory($id: Int!, $name: String!) {
   updateCategory(
-    updateCategoryInput: { id: $id, name: $name, section: $section }
+    updateCategoryInput: { id: $id, name: $name }
   ) {
     id
     name

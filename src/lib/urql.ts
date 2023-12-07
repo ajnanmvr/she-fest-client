@@ -3,7 +3,7 @@ import { Client, cacheExchange, createClient, fetchExchange } from "urql/core";
 let _client: Client | null = null;
 
 export const SERVER_URL = //'http://127.0.0.1:4000/graphql' //"https://sturdy-space-garbanzo-wj99qr54j57h5qx9-4000.app.github.dev/graphql"
-  "https://result-gen.vercel.app/graphql" || process.env.SERVER_URL as string;
+  "https://she-fest-api.vercel.app/graphql" 
 
 export const getUrqlClient = () => {
   if (!_client) {

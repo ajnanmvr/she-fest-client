@@ -9,9 +9,6 @@ query GetAllProgrammes($api_key: String!) {
     category {
       name
     }
-    skill {
-      name
-    }
   }
 }
 
@@ -20,16 +17,25 @@ query GetProgrammeByCode($api_key: String!, $programCode: String!) {
     candidateProgramme {
       candidate {
         name
-        imageId
         chestNO
         team {
           name
         }
       }
-      position{
+      finalgrade {
+        id
         name
       }
-      grade{
+      finalposition {
+        id
+        name
+      }
+      zonalgrade {
+        id
+        name
+      }
+      zonalposition {
+        id
         name
       }
       candidatesOfGroup {
@@ -41,7 +47,6 @@ query GetProgrammeByCode($api_key: String!, $programCode: String!) {
     resultEntered
     resultPublished
     programCode
-    model
     name
     type
     groupCount
@@ -51,9 +56,6 @@ query GetProgrammeByCode($api_key: String!, $programCode: String!) {
     anyIssue
     mode
     type
-    skill {
-      name
-    }
     category {
       name
     }
@@ -84,16 +86,12 @@ query GetDetailedProgramme($id: Int!, $api_key: String!) {
     resultPublished
     programCode
     candidateCount
-    model
     name
     type
     groupCount
     resultEntered
     resultPublished
     anyIssue
-    skill {
-      name
-    }
     category {
       name
     }
@@ -113,7 +111,6 @@ query GetPublishedProgrammes($api_key: String!) {
   resultPublishedProgrammes(api_key: $api_key) {
     id
     name
-    model
     mode
     type
     programCode
@@ -123,32 +120,39 @@ query GetPublishedProgrammes($api_key: String!) {
     category {
       name
     }
-    skill {
-      name
-    }
     anyIssue
     candidateProgramme {
       id
       point
-      position{
+      finalgrade {
+        name
+        pointGroup
+        pointSingle
+        pointHouse
+      }
+      finalposition {
         name
         value
         pointGroup
         pointSingle
         pointHouse
       }
-      grade{
+      zonalgrade {
         name
         pointGroup
         pointSingle
         pointHouse
       }
+      zonalposition {
+        name
+        value
+        pointGroup
+        pointSingle
+        pointHouse
+      }
       candidate {
-        class
-        imageId
         name
         chestNO
-        class
         team {
           name
           id
@@ -162,7 +166,6 @@ query GetEnteredProgrammes($api_key: String!) {
   resultEnteredProgrammes(api_key: $api_key) {
     id
     name
-    model
     mode
     type
     programCode
@@ -172,32 +175,39 @@ query GetEnteredProgrammes($api_key: String!) {
     category {
       name
     }
-    skill {
-      name
-    }
     anyIssue
     candidateProgramme {
       id
       point
-      position{
+      finalgrade {
+        name
+        pointGroup
+        pointSingle
+        pointHouse
+      }
+      finalposition {
         name
         value
         pointGroup
         pointSingle
         pointHouse
       }
-      grade{
+      zonalgrade {
         name
         pointGroup
         pointSingle
         pointHouse
       }
+      zonalposition {
+        name
+        value
+        pointGroup
+        pointSingle
+        pointHouse
+      }
       candidate {
-        class
-        imageId
         name
         chestNO
-        class
         team {
           name
           id
@@ -214,7 +224,7 @@ query GetAllDetailedProgrammeForJudge($api_key: String!) {
       candidate {
         name
         chestNO
-        team{
+        team {
           name
         }
       }
@@ -223,11 +233,31 @@ query GetAllDetailedProgrammeForJudge($api_key: String!) {
         chestNO
       }
       mark
-      grade {
+      finalgrade {
         name
+        pointGroup
+        pointSingle
+        pointHouse
       }
-      position {
+      finalposition {
         name
+        value
+        pointGroup
+        pointSingle
+        pointHouse
+      }
+      zonalgrade {
+        name
+        pointGroup
+        pointSingle
+        pointHouse
+      }
+      zonalposition {
+        name
+        value
+        pointGroup
+        pointSingle
+        pointHouse
       }
     }
     resultEntered
@@ -260,7 +290,6 @@ query GetAllDetailedProgramme($api_key: String!) {
     resultEntered
     resultPublished
     programCode
-    model
     name
     type
     groupCount
@@ -268,9 +297,6 @@ query GetAllDetailedProgramme($api_key: String!) {
     resultEntered
     resultPublished
     anyIssue
-    skill {
-      name
-    }
     category {
       name
     }
@@ -292,9 +318,6 @@ query GetAllProgrammesByCandidates($api_key: String!) {
     category {
       name
     }
-    skill {
-      name
-    }
     candidateProgramme {
       id
     }
@@ -308,7 +331,6 @@ query GetOneProgramme($id: Int!, $api_key: String!) {
     resultEntered
     resultPublished
     programCode
-    model
     duration
     anyIssue
     candidateCount
@@ -316,9 +338,6 @@ query GetOneProgramme($id: Int!, $api_key: String!) {
     venue
     date
     category {
-      name
-    }
-    skill {
       name
     }
     type
@@ -333,11 +352,9 @@ mutation AddProgramme(
   $category: String!
   $duration: Int!
   $groupCount: Int
-  $model: Model!
   $programCode: String!
   $type: Type!
   $mode: Mode!
-  $skill: String!
   $conceptNote: String!
 ) {
   createProgramme(
@@ -347,11 +364,9 @@ mutation AddProgramme(
       category: $category
       duration: $duration
       groupCount: $groupCount
-      model: $model
       programCode: $programCode
       type: $type
       mode: $mode
-      skill: $skill
       conceptNote: $conceptNote
     }
   ) {
@@ -360,7 +375,6 @@ mutation AddProgramme(
     resultEntered
     resultPublished
     programCode
-    model
   }
 }
 
@@ -371,7 +385,6 @@ mutation AddManyProgrammes($inputs: [CreateProgrammeInput!]!) {
     resultEntered
     resultPublished
     programCode
-    model
   }
 }
 
@@ -388,11 +401,9 @@ mutation EditProgramme(
   $category: String!
   $duration: Int!
   $groupCount: Int
-  $model: Model!
   $programCode: String!
   $type: Type!
   $mode: Mode!
-  $skill: String!
   $conceptNote: String!
 ) {
   updateProgramme(
@@ -403,11 +414,9 @@ mutation EditProgramme(
       category: $category
       duration: $duration
       groupCount: $groupCount
-      model: $model
       programCode: $programCode
       type: $type
       mode: $mode
-      skill: $skill
       conceptNote: $conceptNote
     }
   ) {
@@ -416,7 +425,6 @@ mutation EditProgramme(
     resultEntered
     resultPublished
     programCode
-    model
   }
 }
 
