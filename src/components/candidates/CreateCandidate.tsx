@@ -50,9 +50,7 @@ const CreateCandidate = (props: Props) => {
           e.preventDefault();
           HandleSubmit();
         }}
-        className={
-          ` ${props.isCreate ? "block" : "hidden"} ` 
-        }
+        className={` ${props.isCreate ? "block" : "hidden"} `}
       >
         <p>Chest Nom</p>
         <input

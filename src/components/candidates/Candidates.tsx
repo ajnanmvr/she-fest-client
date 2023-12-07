@@ -84,7 +84,7 @@ function Candidates(props: Props) {
 
       <CreateCandidate candidates={candidates} setCandidates={setCandidates} isCreate={isCreate} setIsCreate={setIsCreate} categories={props.categories} teams={props.teams}/>
       <UpdateCandidate candidates={candidates} setCandidates={setCandidates} isUpdate={isUpdate} setIsUpdate={setIsUpdate} selected={selected} categories={props.categories} teams={props.teams} />
-      <DeleteCandidate candidates={candidates} setCandidates={setCandidates} isDelete={isDelete} setIsDelete={setIsDelete}/>
+      <DeleteCandidate candidates={candidates} setCandidates={setCandidates} isDelete={isDelete} setIsDelete={setIsDelete} selected={selected} />
     </>
   );
 }
