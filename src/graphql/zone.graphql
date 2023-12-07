@@ -1,4 +1,4 @@
-query GetAllCategories {
+query GetAllZones {
   zones{
     id
     name
