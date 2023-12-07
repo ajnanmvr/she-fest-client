@@ -1,7 +1,10 @@
+import Login from "@/components/Login";
+
 export default function Page(){
     return(
         <div>
-            <p>Hi</p>
+            {/* <p>Hi</p> */}
+            <Login />
         </div>
     )
 }
