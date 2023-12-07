@@ -1,5 +1,10 @@
-import Candidates from "@/components/Candidates";
-import { Candidate, GetAllCandidatesDocument, GetAllCandidatesQuery, GetAllCandidatesQueryVariables } from "@/gql/graphql";
+import Candidates from "@/components/candidates/Candidates";
+import {
+  Candidate,
+  GetAllCandidatesDocument,
+  GetAllCandidatesQuery,
+  GetAllCandidatesQueryVariables,
+} from "@/gql/graphql";
 import { API_KEY } from "@/lib/env";
 import { getUrqlClient } from "@/lib/urql";
 
@@ -14,12 +19,9 @@ export default async function Page() {
 
   let candidates: Candidate[] = result.data?.candidates as Candidate[];
 
-  console.log(result.data?.candidates);
-
   return (
     <div>
-      <button className="bg-primary w-1/6 self-end">Create Candidate</button>
-      <Candidates candidates={candidates}/>
+      <Candidates candidates={candidates} />
     </div>
-  )
+  );
 }

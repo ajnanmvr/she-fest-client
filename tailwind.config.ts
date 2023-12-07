@@ -9,11 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: '#0F5533',
-        light: '#117947',
-        dark: '#083922',
-        smoke: '#D9EEE4',
-        smoker: '#cae5d8',
+        primary: '#186F65', // Change this to your primary color code
+        primaryDark: '#104a43', // Change this to your primary color code
+        secondary: '#d5e5e3',
       },
     },
   },
