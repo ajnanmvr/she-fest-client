@@ -12,16 +12,13 @@ export default async function Page() {
   >(GetAllProgrammesDocument, {
     api_key: API_KEY,
   });
-  console.log(programmes.data?.programmes);
-  
+
   const categories = await client.query<
     GetAllCategoriesQuery,
     GetAllCategoriesQueryVariables
   >(GetAllCategoriesDocument, {
     api_key: API_KEY,
   });
-
-
 
   return (
     <div>

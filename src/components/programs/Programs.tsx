@@ -5,6 +5,7 @@ import { withUrqlClient } from 'next-urql';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { cacheExchange, fetchExchange } from 'urql';
+import CreateProgram from './CreateProgram';
 
 interface Props {
   programmes: Programme[];
@@ -62,7 +63,6 @@ function Programs(props: Props) {
           </div>
           <div className="flex flex-wrap gap-2 justify-center mt-3">
             {filteredData.map((program, index) => (
-              // <Link key={index} href={`/program/${item.slug}`}>
               <div className="w-72 bg-secondary p-6 rounded-xl flex flex-col gap-2 items-start cursor-pointer">
                 <div className="flex justify-between items-center w-full">
                   {' '}
@@ -77,11 +77,17 @@ function Programs(props: Props) {
                   <p className="line-clamp-2 text-center">{program.name}</p>
                 </div>
               </div>
-              // </Link>
             ))}
           </div>
         </div>
       </div>
+      <CreateProgram
+        isCreate={isCreate}
+        setIsCreate={setIsCreate}
+        categories={props.categories}
+        setPrograms={setPrograms}
+        programs={programs}
+        />
     </>
   );
 }
