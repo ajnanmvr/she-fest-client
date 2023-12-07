@@ -1,11 +1,11 @@
-query GetAllCategories ($api_key: String!){
-  zones(){
+query GetAllCategories {
+  zones{
     id
     name
   }
 }
 
-query GetOneZone($id: Int! , $api_key: String!) {
+query GetOneZone($id: Int! , ) {
   zone(id: $id , ) {
     id
     name
