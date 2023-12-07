@@ -5,6 +5,7 @@ query GetAllTeams($api_key: String!) {
     totalPoint
     totalSportsPoint
     color
+    shortName
   }
 }
 
