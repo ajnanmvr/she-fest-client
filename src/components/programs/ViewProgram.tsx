@@ -72,15 +72,10 @@ const ViewProgram = (props: Props) => {
       } `}
     >
       <div className="bg-white p-3 rounded-xl flex flex-col items-center min-w-[400px]  max-w-[400px] max-h-screen text-center ">
-        {/* {data && data.admin?.roles == Roles.Admin || Roles.Controller  && (
+        { (data.admin?.roles == Roles.Admin || data.admin?.roles == Roles.Controller || data?.roles == Roles.Controller )  && (
           <>
             {
-              // props.selected?.candidateProgramme?.map((candidate, index) => (
-              //   <div className="border-2 border-primary rounded-lg p-3 my-2 w-full flex justify-between items-center">
-              //     <p className="text-primary font-semibold">{candidate.candidate?.name}</p>
-              //     <p className="text-primary font-semibold">{candidate.candidate?.team?.name}</p>
-              //   </div>
-              // ))
+             
               <>
                 <p className="text-lg mt-3 font-bold text-primary">
                   Candidates
@@ -144,12 +139,12 @@ const ViewProgram = (props: Props) => {
               </>
             }
           </>
-        )} */}
+        )}
 
-        {data && data.admin?.roles == Roles.TeamManager && (
+        {data.roles == Roles.TeamManager  ? (
           <div>
             <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
-              <p className="text-primary font-bold">Muhammed Hashim</p>
+              <p className="text-primary font-bold">Muhammed Hashim T</p>
               <p className="text-primary font-semibold">Vahdiyya Kondotty</p>
             </div>
             <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
@@ -157,8 +152,8 @@ const ViewProgram = (props: Props) => {
               <p className="text-primary font-semibold">Vahdiyya Kondotty</p>
             </div>
           </div>
-        )}
-        {data && data.admin?.roles == Roles.TeamManager && (
+        ) : "No data"}
+        {data && data.roles == Roles.TeamManager && (
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -198,7 +193,11 @@ const ViewProgram = (props: Props) => {
         )}
         <button
           className="bg-red-700 text-white font-bold px-3 py-2 rounded-lg mt-3"
-          onClick={() => props.setIsView(false)}
+          onClick={() =>{
+            props.setIsView(false)
+            console.log(data);
+            
+          }}
         >
           Close
         </button>
