@@ -8,34 +8,34 @@ function Header() {
         {" "}
         <Link
           className="bg-white text-primary p-2 hover:bg-secondary font-bold rounded-2xl mx-1"
-          href="/"
+          href="/admin/"
         >
           Home
         </Link>
         <Link
           className="bg-white text-primary p-2 hover:bg-secondary font-bold rounded-2xl mx-1"
-          href="/program"
+          href="/admin/programs"
         >
           Programs
         </Link>
         <Link
           className="bg-white text-slate-800 p-2 hover:bg-secondary font-bold rounded-2xl mx-1"
-          href="/candidates/"
+          href="/admin/candidates/"
         >
           Candidates
         </Link>
         <Link
           className="bg-white text-slate-800 p-2 hover:bg-secondary font-bold rounded-2xl mx-1"
-          href="/institutions/"
+          href="/admin/institutions/"
         >
           institutions
         </Link>
       </div>
-      <div className="flex  md:hidden w-full  items-center justify-center p-2 ">
+      <div className="flex fixed bottom-1 bg-white md:hidden w-full  items-center justify-center p-2 ">
         {" "}
         <Link
           className=" bg-white text-primary p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
-          href="/"
+          href="/admin/"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ function Header() {
         </Link>
         <Link
           className=" bg-white text-primary p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
-          href="/program"
+          href="/admin/programs"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@ function Header() {
         </Link>
         <Link
           className=" bg-white text-primary p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
-          href="/candidates/"
+          href="/admin/candidates/"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +82,7 @@ function Header() {
         </Link>
         <Link
           className=" bg-white text-primary p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
-          href="/institutions/"
+          href="/admin/institutions/"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

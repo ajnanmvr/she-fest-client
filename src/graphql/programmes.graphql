@@ -3,11 +3,19 @@ query GetAllProgrammes($api_key: String!) {
     id
     name
     programCode
-    resultEntered
-    resultPublished
+    # resultEntered
+    # resultPublished
     candidateCount
     category {
       name
+    }
+    candidateProgramme{
+      candidate{
+        name
+        team{
+          name
+        }
+      }
     }
   }
 }

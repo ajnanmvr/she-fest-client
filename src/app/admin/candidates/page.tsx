@@ -38,7 +38,7 @@ export default async function Page() {
   >(GetAllTeamsDocument, {
     api_key: API_KEY,
   });
-
+  
   return (
     <div>
       <Candidates pageProps={1} teams = {teams.data?.teams as Team[]} categories={categories.data?.categories as Category[]}  candidates={candidates.data?.candidates as Candidate[] } />

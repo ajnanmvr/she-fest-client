@@ -5,6 +5,8 @@ import { withUrqlClient } from "next-urql";
 import { useState } from "react";
 import { cacheExchange, fetchExchange } from "urql";
 import CreateTeam from "./CreateInstitution";
+import UpdateTeam from "./UpdateInstitution";
+import DeleteTeam from "./DeleteInstitution";
 interface Props {
   teams: Team[];
   zones : Zone[]
@@ -74,6 +76,7 @@ function Institutions(props: Props) {
                   <button onClick={()=>{
                     setIsUpdate(true)
                     setSelected( institution )
+                    console.log(selected);
                   }} className="bg-white border border-dashed border-primary rounded-xl px-4 py-2 ">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -123,22 +126,21 @@ function Institutions(props: Props) {
       setTeams={setInstitutions}
       zones={props.zones}
       />
-      {/* <UpdateTeam
-        candidates={candidates}
-        setTeams={setTeams}
-        isUpdate={isUpdate}
-        setIsUpdate={setIsUpdate}
-        selected={selected}
-        categories={props.categories}
-        teams={props.teams}
+      <UpdateTeam
+      isUpdate={isUpdate}
+      setIsUpdate={setIsUpdate}
+      teams={institutions}
+      setTeams={setInstitutions}
+      zones={props.zones}
+      selected={selected as Team}
       />
       <DeleteTeam
-        candidates={candidates}
-        setTeams={setTeams}
+        candidates={institutions}
+        setTeams={setInstitutions}
         isDelete={isDelete}
         setIsDelete={setIsDelete}
         selected={selected}
-      /> */}
+      />
   </>;
 }
 export default withUrqlClient(() => ({

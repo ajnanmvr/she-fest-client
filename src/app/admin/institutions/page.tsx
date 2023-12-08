@@ -1,4 +1,3 @@
-import Candidates from "@/components/candidates/Candidates";
 import Institutions from "@/components/institutions/Institutions";
 import { GetAllTeamsDocument, GetAllTeamsQuery, GetAllTeamsQueryVariables, GetAllZonesDocument, GetAllZonesQuery, GetAllZonesQueryVariables, Team, Zone } from "@/gql/graphql";
 import { API_KEY } from "@/lib/env";

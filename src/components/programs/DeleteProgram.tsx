@@ -1,35 +1,35 @@
 import {
-    Team,
-    DeleteTeamDocument,
-    DeleteTeamMutation,
-    DeleteTeamMutationVariables,
+    Programme,
+    DeleteProgrammeDocument,
+    DeleteProgrammeMutation,
+    DeleteProgrammeMutationVariables,
   } from '@/gql/graphql';
   import React from 'react';
   import { OperationResult, useMutation } from 'urql';
   interface Props {
     isDelete: boolean;
     setIsDelete: React.Dispatch<React.SetStateAction<boolean>>;
-    candidates: Team[];
-    setTeams: React.Dispatch<React.SetStateAction<Team[]>>;
-    selected: Team | null;
+    programmes: Programme[];
+    setProgrammes: React.Dispatch<React.SetStateAction<Programme[]>>;
+    selected: Programme | null;
   }
   
-  function DeleteTeam(props: Props) {
-    const [state, DeleteTeamExecute] = useMutation(DeleteTeamDocument);
+  function DeleteProgramme(props: Props) {
+    const [state, DeleteProgrammeExecute] = useMutation(DeleteProgrammeDocument);
   
     const HandleDelete = async () => {
       const deletedData: OperationResult<
-        DeleteTeamMutation,
-        DeleteTeamMutationVariables
-      > = await DeleteTeamExecute({
+        DeleteProgrammeMutation,
+        DeleteProgrammeMutationVariables
+      > = await DeleteProgrammeExecute({
         id: props.selected?.id as number,
       });
-      if (deletedData.data?.removeTeam?.__typename) {
-        const deleted = props.candidates.filter((value, index) => {
+      if (deletedData.data?.removeProgramme?.__typename) {
+        const deleted = props.programmes.filter((value, index) => {
           return value.id !== props.selected?.id;
         });
   
-        props.setTeams(deleted);
+        props.setProgrammes(deleted);
         props.setIsDelete(false);
       }
     };
@@ -64,5 +64,5 @@ import {
     );
   }
   
-  export default DeleteTeam;
+  export default DeleteProgramme;
   

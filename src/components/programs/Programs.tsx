@@ -6,6 +6,8 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { cacheExchange, fetchExchange } from 'urql';
 import CreateProgram from './CreateProgram';
+import DeleteProgramme from './DeleteProgram';
+import ViewProgram from './ViewProgram';
 
 interface Props {
   programmes: Programme[];
@@ -18,6 +20,7 @@ function Programs(props: Props) {
   const [isUpdate, setIsUpdate] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [selected, setSelected] = useState<Programme | null>(null);
+  const [view , setIsView] = useState(false)
   const filteredData = programs.filter((program) => {
     return (
       program?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -63,7 +66,12 @@ function Programs(props: Props) {
           </div>
           <div className="flex flex-wrap gap-2 justify-center mt-3">
             {filteredData.map((program, index) => (
-              <div className="w-72 bg-secondary p-6 rounded-xl flex flex-col gap-2 items-start cursor-pointer">
+              <div onClick={
+                ()=>{
+                  setSelected(program)
+                  setIsView(true)
+                }
+              } className="w-72 bg-secondary p-6 rounded-xl flex flex-col gap-2 items-start cursor-pointer">
                 <div className="flex justify-between items-center w-full">
                   {' '}
                   <h1 className="px-2 py-1 bg-primary inline rounded-lg text-white font-semibold">
@@ -87,6 +95,20 @@ function Programs(props: Props) {
         categories={props.categories}
         setPrograms={setPrograms}
         programs={programs}
+        />
+        <ViewProgram
+        isView={view}
+        setIsView={setIsView}
+        categories={props.categories}
+        setPrograms={setPrograms}
+        programs={programs}
+        />
+        <DeleteProgramme
+         programmes={programs}
+         setProgrammes={setPrograms}
+         isDelete={isDelete}
+         setIsDelete={setIsDelete}
+         selected={selected}
         />
     </>
   );

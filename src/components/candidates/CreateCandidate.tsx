@@ -80,7 +80,7 @@ const CreateCandidate = (props: Props) => {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">Select Category</option>
-            {props.categories.map((category, index) => (
+            {props.categories?.map((category, index) => (
               <option key={index} value={category.name as string}>
                 {category.name}
               </option>
@@ -93,7 +93,7 @@ const CreateCandidate = (props: Props) => {
             onChange={(e) => setTeam(e.target.value)}
           >
             <option value="">Select Team</option>
-            {props.teams.map((team, index) => (
+            {props.teams?.map((team, index) => (
               <option key={index} value={team.name as string}>
                 {team.name}
               </option>
