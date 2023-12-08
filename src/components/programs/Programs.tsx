@@ -19,7 +19,7 @@ function Programs(props: Props) {
   const [isCreate, setIsCreate] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
-  const [selected, setSelected] = useState<Programme | null>(null);
+  const [selected, setSelected] = useState<Programme >();
   const [view , setIsView] = useState(false)
   const filteredData = programs.filter((program) => {
     return (
@@ -102,13 +102,14 @@ function Programs(props: Props) {
         categories={props.categories}
         setPrograms={setPrograms}
         programs={programs}
+        selected={selected as Programme}
         />
         <DeleteProgramme
          programmes={programs}
          setProgrammes={setPrograms}
          isDelete={isDelete}
          setIsDelete={setIsDelete}
-         selected={selected}
+         selected={selected as Programme}
         />
     </>
   );

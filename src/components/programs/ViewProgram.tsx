@@ -10,6 +10,7 @@ import {
     Category,
     Mode,
     Programme,
+    Roles,
     Team,
     Type,
   } from "@/gql/graphql";
@@ -22,6 +23,7 @@ import {
     programs: Programme[];
     setPrograms: React.Dispatch<React.SetStateAction<Programme[]>>;
     categories: Category[];
+    selected: Programme;
   }
   
   const ViewProgram = (props: Props) => {
@@ -71,10 +73,22 @@ import {
         <div className="bg-white p-3 rounded-xl flex flex-col items-center max-w-[400px] text-center">
         <p className="text-sm mt-3 font-bold text-primary">Candidates</p>
         {
-            // data && data.admin?.roles    
+            data && data.admin?.roles  == Roles.Admin || Roles.Controller ? (
+              <>
+             {
+              props.selected?.candidateProgramme?.map((candidate, index) => (
+                <div className="border-2 border-primary rounded-lg p-3 my-2 w-full flex justify-between items-center">
+                  <p className="text-primary font-semibold">{candidate.candidate?.name}</p>
+                  <p className="text-primary font-semibold">{candidate.candidate?.team?.name}</p>
+                </div>
+              ))
+
+             }
+              </>
+            ) : <></>
 
         }
-          {/* <form
+          <form
             onSubmit={(e) => {
               e.preventDefault();
               HandleSubmit();
@@ -106,7 +120,7 @@ import {
             <button className="w-full bg-primary text-white font-bold px-3 py-2 rounded-lg mt-3">
               Submit
             </button>
-          </form> */}
+          </form>
           <button
             className="bg-red-700 text-white font-bold px-3 py-2 rounded-lg"
             onClick={() => props.setIsView(false)}
