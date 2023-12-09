@@ -71,7 +71,7 @@ const ViewProgram = (props: Props) => {
         props.isView ? "block" : "hidden"
       } `}
     >
-      <div className="bg-white p-3 rounded-xl flex flex-col items-center min-w-[400px]  max-w-[400px] max-h-screen text-center ">
+      <div className="bg-white p-3 rounded-xl flex flex-col items-center min-w-[400px]  max-w-[400px] max-h-[95vh] text-center ">
         {(data.admin?.roles == Roles.Admin ||
           data.admin?.roles == Roles.Controller ||
           data?.roles == Roles.Controller) && (
@@ -83,64 +83,61 @@ const ViewProgram = (props: Props) => {
                 </p>
                 <input
                   type="text"
-                  className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+                  className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3 my-2"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={`Search by name or chest number..`}
                 />
                 <div className="w-full   overflow-y-auto">
-                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
-                    <p className="text-primary font-black text-2xl">
-                      Muhammed Hashim
+                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
+                    <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                      2333{" "}
                     </p>
                     <p className="text-primary font-bold">Muhammed Hashim</p>
                     <p className="text-primary font-semibold">
                       Vahdiyya Kondotty
                     </p>
                   </div>
-                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
-                    <p className="text-primary font-bold">Muhammed Hashim</p>
-                    <p className="text-primary font-semibold">
-                      Vahdiyya Kondotty
+                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
+                    <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                      2333{" "}
                     </p>
-                  </div>{" "}
-                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
-                    <p className="text-primary font-bold">Muhammed Hashim</p>
-                    <p className="text-primary font-semibold">
-                      Vahdiyya Kondotty
-                    </p>
-                  </div>{" "}
-                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
-                    <p className="text-primary font-bold">Muhammed Hashim</p>
-                    <p className="text-primary font-semibold">
-                      Vahdiyya Kondotty
-                    </p>
-                  </div>{" "}
-                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
                     <p className="text-primary font-bold">Muhammed Hashim</p>
                     <p className="text-primary font-semibold">
                       Vahdiyya Kondotty
                     </p>
                   </div>
-                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
+                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
+                    <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                      2333{" "}
+                    </p>
                     <p className="text-primary font-bold">Muhammed Hashim</p>
                     <p className="text-primary font-semibold">
                       Vahdiyya Kondotty
                     </p>
                   </div>
-                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
+                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
+                    <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                      2333{" "}
+                    </p>
                     <p className="text-primary font-bold">Muhammed Hashim</p>
                     <p className="text-primary font-semibold">
                       Vahdiyya Kondotty
                     </p>
                   </div>
-                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
+                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
+                    <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                      2333{" "}
+                    </p>
                     <p className="text-primary font-bold">Muhammed Hashim</p>
                     <p className="text-primary font-semibold">
                       Vahdiyya Kondotty
                     </p>
                   </div>
-                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
+                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
+                    <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                      2333{" "}
+                    </p>
                     <p className="text-primary font-bold">Muhammed Hashim</p>
                     <p className="text-primary font-semibold">
                       Vahdiyya Kondotty
@@ -152,7 +149,7 @@ const ViewProgram = (props: Props) => {
           </>
         )}
 
-        {data.roles == Roles.TeamManager ? (
+        {data.roles == Roles.TeamManager && (
           <div>
             <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
               <p className="text-primary font-bold">Muhammed Hashim T</p>
@@ -163,8 +160,6 @@ const ViewProgram = (props: Props) => {
               <p className="text-primary font-semibold">Vahdiyya Kondotty</p>
             </div>
           </div>
-        ) : (
-          "No data"
         )}
         {data && data.roles == Roles.TeamManager && (
           <form
