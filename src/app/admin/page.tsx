@@ -1,6 +1,7 @@
 "use client";
 
 import { useGlobalContext } from "@/context/context";
+import { Roles } from "@/gql/graphql";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
@@ -49,25 +50,29 @@ export default function Page() {
         </svg>
         <p className="font-semibold text-lg">Programs</p>
       </div>
-      <div onClick={()=>{
-        roter.push('/admin/institutions')
-      }} className="cursor-pointer w-72 h-12 flex items-center justify-center hover:bg-light border-primary border rounded-lg text-white px-3 py-1 gap-2 bg-primary">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-8 h-8"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"
-          />
-        </svg>
-        <p className="font-semibold text-lg">Institutions</p>
-      </div>
+      {
+         (data.roles == Roles.Controller || data.roles == Roles.Admin ) && (
+          <div onClick={()=>{
+            roter.push('/admin/institutions')
+          }} className="cursor-pointer w-72 h-12 flex items-center justify-center hover:bg-light border-primary border rounded-lg text-white px-3 py-1 gap-2 bg-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-8 h-8"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"
+              />
+            </svg>
+            <p className="font-semibold text-lg">Institutions</p>
+          </div>
+         )    }
+      
       <div onClick={()=>{
         roter.push('/login')
       }} className="cursor-pointer w-72 h-12 flex items-center justify-center hover:bg-light border-red-600 border rounded-lg text-white px-3 py-1 gap-2 bg-red-600">
