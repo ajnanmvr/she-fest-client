@@ -186,14 +186,22 @@ const ViewProgram = (props: Props) => {
 
         {data.roles == Roles.TeamManager && (
           <div>
-            <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
-              <p className="text-primary font-bold">Muhammed Hashim T</p>
-              <p className="text-primary font-semibold">Vahdiyya Kondotty</p>
-            </div>
-            <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
-              <p className="text-primary font-bold">Muhammed Hashim</p>
-              <p className="text-primary font-semibold">Vahdiyya Kondotty</p>
-            </div>
+            {
+              props.selected?.candidateProgramme?.map((cp)=>{
+                return(
+            
+                  <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
+                    <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                      {cp.candidate?.chestNO}{" "}
+                    </p>
+                    <p className="text-primary font-bold">{cp.candidate?.name}</p>
+                    <p className="text-primary font-semibold">
+                      {cp.candidate?.team?.name}
+                    </p>
+                  </div>
+                )
+              })
+            }
           </div>
         )}
         {data && data.roles == Roles.TeamManager && (
