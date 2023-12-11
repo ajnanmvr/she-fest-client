@@ -45,6 +45,11 @@ const ViewProgram = (props: Props) => {
   const [mode, setMode] = React.useState<string>("");
   const [conceptNote, setConceptNote] = React.useState<string>("");
   const [lookUp, setLookUp] = React.useState<string>("");
+  let filteredCandidates = candidates?.find((candidate) => {
+    return (
+      candidate?.chestNO?.toLowerCase() == chestNo.toLowerCase()
+    );
+  });
   const { data, setData } = useGlobalContext();
 
   const HandleSubmit = async () => {
@@ -207,25 +212,13 @@ const ViewProgram = (props: Props) => {
               type="text"
               className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
               value={chestNo}
-              onChange={(e) => {            
+              onChange={(e) => {
                 setChestNo(e.target.value);
+
               }}
               placeholder={`Chest No`}
             />
-            {candidates?.map((candidate, index) => (
-              candidate.chestNO == chestNo && (
-                <p className="text-sm mt-1 font-bold text-primary">
-                {candidate.name}
-              </p>
-              )
-            ))}
-            {candidates?.map((candidate, index) => (
-              candidate.chestNO !== chestNo && (
-                <p className="text-sm mt-1 font-bold text-primary">
-                Candidate Not Found
-              </p>
-              )
-            ))}
+            <p className="text-sm mt-1 font-bold text-primary">{chestNo.length > 0 ? !filteredCandidates ? "No candidates font" : filteredCandidates?.name : ""}</p>
             <button className="w-full bg-primary text-white font-bold px-3 py-2 rounded-lg mt-3">
               Add Candidate
             </button>
