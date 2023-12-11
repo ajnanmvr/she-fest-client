@@ -34,6 +34,8 @@ const CreateProgram = (props: Props) => {
   const [type, setType] = React.useState<string>("");
   const [mode, setMode] = React.useState<string>("");
   const [conceptNote, setConceptNote] = React.useState<string>("");
+  const typesOfProgram = Object.values(Type);
+  const modesOfProgram = Object.values(Mode);
 
   const HandleSubmit = async () => {
     const datas: OperationResult<
@@ -60,19 +62,19 @@ const CreateProgram = (props: Props) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center  items-center  ${
-        props.isCreate ? "block" : "hidden"
-      } `}
+      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center  items-center  ${props.isCreate ? "block" : "hidden"
+        } `}
     >
-      <div className="bg-white p-3 rounded-xl flex flex-col items-center max-w-[400px] text-center">
+      <div className="bg-white p-3 rounded-xl flex flex-col items-center min-w-[400px]  max-w-[400px] max-h-[95vh] text-center ">
+        <p className="text-lg mt-3 font-bold text-primary">Create Program</p>
         <form
           onSubmit={(e) => {
             e.preventDefault();
             HandleSubmit();
           }}
-          className={`p-3 text-left`}
+          className={`w-full p-3 text-left overflow-y-auto`}
         >
-          <p className="w-full text-sm mt-3 font-bold text-primary">Name</p>
+          <p className="w-full text-sm font-bold text-primary">Name</p>
           <input
             type="text"
             className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
@@ -126,6 +128,38 @@ const CreateProgram = (props: Props) => {
             placeholder={`Program Code`}
           />
           <p className="w-full text-sm mt-3 font-bold text-primary">Type</p>
+          <select
+            className="w-full border-2  border-primary rounded-md placeholder:text-sm p-2"
+            value={type}
+            onChange={(e) => setType(e.target.value)}
+          >
+            <option value="">Select Type</option>
+            {typesOfProgram?.map((type, index) => (
+              <option key={index} value={type as string}>
+                {type}
+              </option>
+            ))}
+          </select>
+          <p className="w-full text-sm mt-3 font-bold text-primary">Mode</p>
+          <select
+            className="w-full border-2  border-primary rounded-md placeholder:text-sm p-2"
+            value={mode}
+            onChange={(e) => setMode(e.target.value)}
+          >
+            <option value="">Select Mode</option>
+            {modesOfProgram?.map((mode, index) => (
+              <option key={index} value={mode as string}>
+                {mode.replace("_", " ")}
+              </option>
+            ))}
+          </select>
+          <p className="w-full text-sm mt-3 font-bold text-primary">Concept Note</p>
+          <textarea
+            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            value={conceptNote}
+            onChange={(e) => setConceptNote(e.target.value)}
+            placeholder={`Concept Note`}
+          />
           <button className="w-full bg-primary text-white font-bold px-3 py-2 rounded-lg mt-3">
             Submit
           </button>
