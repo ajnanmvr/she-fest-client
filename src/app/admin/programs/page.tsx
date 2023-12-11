@@ -1,5 +1,5 @@
 import Programs from "@/components/programs/Programs";
-import { Category, GetAllCandidateProgrammesDocument, GetAllCategoriesDocument, GetAllCategoriesQuery, GetAllCategoriesQueryVariables, GetAllProgrammesDocument, GetAllProgrammesQuery, GetAllProgrammesQueryVariables, Programme } from "@/gql/graphql";
+import { Category, GetAllCandidateProgrammesDocument, GetAllCandidatesDocument, GetAllCandidatesQuery, GetAllCandidatesQueryVariables, GetAllCategoriesDocument, GetAllCategoriesQuery, GetAllCategoriesQueryVariables, GetAllProgrammesDocument, GetAllProgrammesQuery, GetAllProgrammesQueryVariables, Programme } from "@/gql/graphql";
 import { API_KEY } from "@/lib/env";
 import { getUrqlClient } from "@/lib/urql";
 
@@ -13,6 +13,13 @@ export default async function Page() {
     api_key: API_KEY,
   });
 
+  const candidates = await client.query<
+  GetAllCandidatesQuery,
+  GetAllCandidatesQueryVariables
+>(GetAllCandidatesDocument, {
+  api_key: API_KEY,
+});
+
   const categories = await client.query<
     GetAllCategoriesQuery,
     GetAllCategoriesQueryVariables
@@ -22,7 +29,7 @@ export default async function Page() {
 
   return (
     <div>
-      <Programs pageProps={1} categories={categories.data?.categories as Category[]}  programmes={programmes.data?.programmes as Programme[] } />
+      <Programs pageProps={1} candidates={candidates.data?.candidates} categories={categories.data?.categories as Category[]}  programmes={programmes.data?.programmes as Programme[] } />
     </div>
   );
 }

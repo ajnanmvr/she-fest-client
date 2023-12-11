@@ -44,33 +44,35 @@ function Candidates(props: Props) {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full px-4 py-2 rounded-xl border-2 border-dashed border-primary"
             />
-            <button
-              className="bg-primary rounded-xl px-4 py-2 "
-              onClick={() => {
-                setIsCreate(true);
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6 text-white"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </button>
+             {(data.roles == Roles.Controller || data.roles == Roles.Admin ) && (
+               <button
+               className="bg-primary rounded-xl px-4 py-2 "
+               onClick={() => {
+                 setIsCreate(true);
+               }}
+             >
+               <svg
+                 xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 strokeWidth={1.5}
+                 stroke="currentColor"
+                 className="w-6 h-6 text-white"
+               >
+                 <path
+                   strokeLinecap="round"
+                   strokeLinejoin="round"
+                   d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                 />
+               </svg>
+             </button>
+            )}
           </div>
 
           <div className="flex flex-wrap gap-2 justify-center mt-3">
             {filteredData.map((candidate, index) => (
               <div
-                className="w-72 bg-secondary p-6 rounded-xl flex flex-col gap-2 items-start cursor-pointer"
+                className="w-72 bg-secondary p-6 rounded-xl flex flex-col gap-2 items-start "
                 key={index}
                 onClick={() => setSelected(candidate)}
               >
