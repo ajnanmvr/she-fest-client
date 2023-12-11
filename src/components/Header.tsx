@@ -8,40 +8,42 @@ function Header() {
   const { data } = useGlobalContext();
   return (
     <>
-      <div className="hidden md:flex w-full  items-center justify-center p-2">
-        {" "}
-        <Link
-          className="bg-white text-primary p-2 hover:bg-secondary font-bold rounded-2xl mx-1"
-          href="/admin/"
-        >
-          Home
-        </Link>
-        <Link
-          className="bg-white text-primary p-2 hover:bg-secondary font-bold rounded-2xl mx-1"
-          href="/admin/programs"
-        >
-          Programs
-        </Link>
-        <Link
-          className="bg-white text-slate-800 p-2 hover:bg-secondary font-bold rounded-2xl mx-1"
-          href="/admin/candidates/"
-        >
-          Candidates
-        </Link>
-        {(data.roles == Roles.Controller || data.roles == Roles.Admin ) && (
-              <Link
-              className="bg-white text-slate-800 p-2 hover:bg-secondary font-bold rounded-2xl mx-1"
+      <div className="hidden px-10 md:flex w-full bg-h-line bg-cover bg-center items-center justify-between my-6">
+        <div className="bg-white px-10">
+          <img src="/img/logo.png" alt="logo" className="h-24" />
+        </div>
+        <div>
+          <Link
+            className="bg-white border px-3 py-1 border-brown hover:bg-yellow hover:text-black font-semibold rounded-2xl mx-1"
+            href="/admin/"
+          >
+            Home
+          </Link>
+          <Link
+            className="bg-white border px-3 py-1 border-brown hover:bg-yellow hover:text-black font-semibold rounded-2xl mx-1"
+            href="/admin/programs"
+          >
+            Programs
+          </Link>
+          <Link
+            className="bg-white border px-3 py-1 border-brown hover:bg-yellow hover:text-black font-semibold rounded-2xl mx-1"
+            href="/admin/candidates/"
+          >
+            Candidates
+          </Link>
+          {(data.roles == Roles.Controller || data.roles == Roles.Admin) && (
+            <Link
+              className="bg-white border px-3 py-1 border-brown hover:bg-yellow hover:text-black font-semibold rounded-2xl mx-1"
               href="/admin/institutions/"
             >
               institutions
             </Link>
-            )}
-        
+          )}
+        </div>
       </div>
-      <div className="flex fixed bottom-0 shadow-lg shadow-black bg-white md:hidden w-full  items-center justify-center p-2 ">
-
+      <div className="flex fixed bottom-0 shadow-lg shadow-black bg-white md:hidden w-full items-center justify-center p-2 ">
         <Link
-          className=" bg-white text-primary p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
+          className=" bg-white text-brown p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
           href="/admin/"
         >
           <svg
@@ -56,7 +58,7 @@ function Header() {
           <p>Home</p>
         </Link>
         <Link
-          className=" bg-white text-primary p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
+          className=" bg-white text-brown p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
           href="/admin/programs"
         >
           <svg
@@ -74,7 +76,7 @@ function Header() {
           Programs
         </Link>
         <Link
-          className=" bg-white text-primary p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
+          className=" bg-white text-brown p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
           href="/admin/candidates/"
         >
           <svg
@@ -87,29 +89,29 @@ function Header() {
           </svg>
           Candidates
         </Link>
-      
-        {(data.roles == Roles.Controller || data.roles == Roles.Admin ) && (
-               <Link
-               className=" bg-white text-primary p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
-               href="/admin/institutions/"
-             >
-               <svg
-                 xmlns="http://www.w3.org/2000/svg"
-                 viewBox="0 0 24 24"
-                 fill="currentColor"
-                 className="w-6 h-6"
-               >
-                 <path d="M11.584 2.376a.75.75 0 01.832 0l9 6a.75.75 0 11-.832 1.248L12 3.901 3.416 9.624a.75.75 0 01-.832-1.248l9-6z" />
-                 <path
-                   fillRule="evenodd"
-                   d="M20.25 10.332v9.918H21a.75.75 0 010 1.5H3a.75.75 0 010-1.5h.75v-9.918a.75.75 0 01.634-.74A49.109 49.109 0 0112 9c2.59 0 5.134.202 7.616.592a.75.75 0 01.634.74zm-7.5 2.418a.75.75 0 00-1.5 0v6.75a.75.75 0 001.5 0v-6.75zm3-.75a.75.75 0 01.75.75v6.75a.75.75 0 01-1.5 0v-6.75a.75.75 0 01.75-.75zM9 12.75a.75.75 0 00-1.5 0v6.75a.75.75 0 001.5 0v-6.75z"
-                   clipRule="evenodd"
-                 />
-                 <path d="M12 7.875a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z" />
-               </svg>
-               institutions
-             </Link>
-            )}
+
+        {(data.roles == Roles.Controller || data.roles == Roles.Admin) && (
+          <Link
+            className=" bg-white text-brown p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
+            href="/admin/institutions/"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-6 h-6"
+            >
+              <path d="M11.584 2.376a.75.75 0 01.832 0l9 6a.75.75 0 11-.832 1.248L12 3.901 3.416 9.624a.75.75 0 01-.832-1.248l9-6z" />
+              <path
+                fillRule="evenodd"
+                d="M20.25 10.332v9.918H21a.75.75 0 010 1.5H3a.75.75 0 010-1.5h.75v-9.918a.75.75 0 01.634-.74A49.109 49.109 0 0112 9c2.59 0 5.134.202 7.616.592a.75.75 0 01.634.74zm-7.5 2.418a.75.75 0 00-1.5 0v6.75a.75.75 0 001.5 0v-6.75zm3-.75a.75.75 0 01.75.75v6.75a.75.75 0 01-1.5 0v-6.75a.75.75 0 01.75-.75zM9 12.75a.75.75 0 00-1.5 0v6.75a.75.75 0 001.5 0v-6.75z"
+                clipRule="evenodd"
+              />
+              <path d="M12 7.875a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z" />
+            </svg>
+            institutions
+          </Link>
+        )}
       </div>
     </>
   );

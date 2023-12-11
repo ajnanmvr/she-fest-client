@@ -68,41 +68,41 @@ const UpdateTeam = (props: Props) => {
           }}
           className={`p-3 text-left`}
         >
-          <p className="text-sm mt-3 font-bold text-primary">Color</p>
+          <p className="text-sm mt-3 font-bold text-brown">Color</p>
           <input
             type="text"
-            className="border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={color}
             onChange={(e) => setColor(e.target.value)}
             placeholder={`color`}
           />
-          <p className="text-sm mt-3 font-bold text-primary">Name</p>
+          <p className="text-sm mt-3 font-bold text-brown">Name</p>
           <input
             type="text"
-            className="border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={`Name`}
           />
-          <p className="text-sm mt-3 font-bold text-primary">Description</p>
+          <p className="text-sm mt-3 font-bold text-brown">Description</p>
           <input
             type="text"
-            className="border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder={`Description`}
           />{' '}
-          <p className="text-sm mt-3 font-bold text-primary">ShortName</p>
+          <p className="text-sm mt-3 font-bold text-brown">ShortName</p>
           <input
             type="text"
-            className="border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={shortName}
             onChange={(e) => setShortName(e.target.value)}
             placeholder={`ShortName`}
           />
-          <p className="text-sm mt-3 font-bold text-primary">Zone</p>
+          <p className="text-sm mt-3 font-bold text-brown">Zone</p>
           <select
-            className="border-2  border-primary rounded-md placeholder:text-sm p-2 w-full"
+            className="border-2  border-brown rounded-md placeholder:text-sm p-2 w-full"
             value={zoneId}
             onChange={(e) => setZoneId(+e.target.value)}
           >
@@ -113,7 +113,7 @@ const UpdateTeam = (props: Props) => {
               </option>
             ))}
           </select>
-          <button className="w-full bg-primary text-white font-bold px-3 py-2 rounded-lg mt-3">
+          <button className="w-full bg-brown text-white font-bold px-3 py-2 rounded-lg mt-3">
             Submit
           </button>
         </form>

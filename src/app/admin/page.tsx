@@ -16,7 +16,7 @@ export default function Page() {
     <div className="w-full h-screen flex flex-col  items-center justify-center gap-2">
       <div onClick={()=>{
         roter.push('/admin/candidates')
-      }} className="cursor-pointer w-72 h-12 flex items-center justify-center hover:bg-light border-primary border rounded-lg text-white px-3 py-1 gap-2 bg-primary">
+      }} className="cursor-pointer w-72 h-12 flex items-center justify-center hover:bg-light border-brown border rounded-lg text-white px-3 py-1 gap-2 bg-brown">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="white"
@@ -35,7 +35,7 @@ export default function Page() {
       </div>
       <div onClick={()=>{
         roter.push('/admin/programs')
-      }} className="cursor-pointer w-72 h-12 flex items-center justify-center hover:bg-light border-primary border rounded-lg text-white px-3 py-1 gap-2 bg-primary">
+      }} className="cursor-pointer w-72 h-12 flex items-center justify-center hover:bg-light border-brown border rounded-lg text-white px-3 py-1 gap-2 bg-brown">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -54,7 +54,7 @@ export default function Page() {
          (data.roles == Roles.Controller || data.roles == Roles.Admin ) && (
           <div onClick={()=>{
             roter.push('/admin/institutions')
-          }} className="cursor-pointer w-72 h-12 flex items-center justify-center hover:bg-light border-primary border rounded-lg text-white px-3 py-1 gap-2 bg-primary">
+          }} className="cursor-pointer w-72 h-12 flex items-center justify-center hover:bg-light border-brown border rounded-lg text-white px-3 py-1 gap-2 bg-brown">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

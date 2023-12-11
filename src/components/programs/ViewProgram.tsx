@@ -99,19 +99,19 @@ const ViewProgram = (props: Props) => {
             <>
               {
                 <>
-                  <p className="text-lg mt-3 font-bold text-primary">
+                  <p className="text-lg mt-3 font-bold text-brown">
                     Candidates
                   </p>
                   <div className="flex w-full gap-1">
                     <input
                       type="text"
-                      className="w-3/5 border-2  border-primary rounded-md placeholder:text-sm py-2 px-3 my-2"
+                      className="w-3/5 border-2  border-brown rounded-md placeholder:text-sm py-2 px-3 my-2"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder={`Search by name or chest number..`}
                     />
                     <select
-                      className="w-2/5 border-2  border-primary rounded-md placeholder:text-sm py-2 px-3 my-2"
+                      className="w-2/5 border-2  border-brown rounded-md placeholder:text-sm py-2 px-3 my-2"
                       value={zone}
                       onChange={(e) => setZone(e.target.value)}
                     >
@@ -124,57 +124,57 @@ const ViewProgram = (props: Props) => {
                     </select>
                   </div>
                   <div className="w-full   overflow-y-auto">
-                    <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
-                      <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                    <div className="border-2 border-brown rounded-lg p-3 my-2 w-full justify-between">
+                      <p className="text-white font-black text-2xl bg-brown rounded-md w-1/3 mx-auto">
                         2333{" "}
                       </p>
-                      <p className="text-primary font-bold">Muhammed Hashim</p>
-                      <p className="text-primary font-semibold">
+                      <p className="text-brown font-bold">Muhammed Hashim</p>
+                      <p className="text-brown font-semibold">
                         Vahdiyya Kondotty
                       </p>
                     </div>
-                    <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
-                      <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                    <div className="border-2 border-brown rounded-lg p-3 my-2 w-full justify-between">
+                      <p className="text-white font-black text-2xl bg-brown rounded-md w-1/3 mx-auto">
                         2333{" "}
                       </p>
-                      <p className="text-primary font-bold">Muhammed Hashim</p>
-                      <p className="text-primary font-semibold">
+                      <p className="text-brown font-bold">Muhammed Hashim</p>
+                      <p className="text-brown font-semibold">
                         Vahdiyya Kondotty
                       </p>
                     </div>
-                    <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
-                      <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                    <div className="border-2 border-brown rounded-lg p-3 my-2 w-full justify-between">
+                      <p className="text-white font-black text-2xl bg-brown rounded-md w-1/3 mx-auto">
                         2333{" "}
                       </p>
-                      <p className="text-primary font-bold">Muhammed Hashim</p>
-                      <p className="text-primary font-semibold">
+                      <p className="text-brown font-bold">Muhammed Hashim</p>
+                      <p className="text-brown font-semibold">
                         Vahdiyya Kondotty
                       </p>
                     </div>
-                    <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
-                      <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                    <div className="border-2 border-brown rounded-lg p-3 my-2 w-full justify-between">
+                      <p className="text-white font-black text-2xl bg-brown rounded-md w-1/3 mx-auto">
                         2333{" "}
                       </p>
-                      <p className="text-primary font-bold">Muhammed Hashim</p>
-                      <p className="text-primary font-semibold">
+                      <p className="text-brown font-bold">Muhammed Hashim</p>
+                      <p className="text-brown font-semibold">
                         Vahdiyya Kondotty
                       </p>
                     </div>
-                    <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
-                      <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                    <div className="border-2 border-brown rounded-lg p-3 my-2 w-full justify-between">
+                      <p className="text-white font-black text-2xl bg-brown rounded-md w-1/3 mx-auto">
                         2333{" "}
                       </p>
-                      <p className="text-primary font-bold">Muhammed Hashim</p>
-                      <p className="text-primary font-semibold">
+                      <p className="text-brown font-bold">Muhammed Hashim</p>
+                      <p className="text-brown font-semibold">
                         Vahdiyya Kondotty
                       </p>
                     </div>
-                    <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
-                      <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                    <div className="border-2 border-brown rounded-lg p-3 my-2 w-full justify-between">
+                      <p className="text-white font-black text-2xl bg-brown rounded-md w-1/3 mx-auto">
                         2333{" "}
                       </p>
-                      <p className="text-primary font-bold">Muhammed Hashim</p>
-                      <p className="text-primary font-semibold">
+                      <p className="text-brown font-bold">Muhammed Hashim</p>
+                      <p className="text-brown font-semibold">
                         Vahdiyya Kondotty
                       </p>
                     </div>
@@ -186,13 +186,13 @@ const ViewProgram = (props: Props) => {
 
         {data.roles == Roles.TeamManager && (
           <div>
-            <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
-              <p className="text-primary font-bold">Muhammed Hashim T</p>
-              <p className="text-primary font-semibold">Vahdiyya Kondotty</p>
+            <div className="border-2 border-brown rounded-lg p-3 my-2 w-full justify-between items-center">
+              <p className="text-brown font-bold">Muhammed Hashim T</p>
+              <p className="text-brown font-semibold">Vahdiyya Kondotty</p>
             </div>
-            <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between items-center">
-              <p className="text-primary font-bold">Muhammed Hashim</p>
-              <p className="text-primary font-semibold">Vahdiyya Kondotty</p>
+            <div className="border-2 border-brown rounded-lg p-3 my-2 w-full justify-between items-center">
+              <p className="text-brown font-bold">Muhammed Hashim</p>
+              <p className="text-brown font-semibold">Vahdiyya Kondotty</p>
             </div>
           </div>
         )}
@@ -204,13 +204,13 @@ const ViewProgram = (props: Props) => {
             }}
             className={`w-full p-3 text-left`}
           >
-            <p className="text-lg mt-3 font-bold text-primary text-center">
+            <p className="text-lg mt-3 font-bold text-brown text-center">
               Add Candidates
             </p>
-            <p className="text-sm mt-3 font-bold text-primary">Chest No</p>
+            <p className="text-sm mt-3 font-bold text-brown">Chest No</p>
             <input
               type="text"
-              className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+              className="w-full border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
               value={chestNo}
               onChange={(e) => {
                 setChestNo(e.target.value);
@@ -218,8 +218,8 @@ const ViewProgram = (props: Props) => {
               }}
               placeholder={`Chest No`}
             />
-            <p className="text-sm mt-1 font-bold text-primary">{chestNo.length > 0 ? !filteredCandidate ? "No candidates font" : filteredCandidate?.name : ""}</p>
-            <button className="w-full bg-primary text-white font-bold px-3 py-2 rounded-lg mt-3">
+            <p className="text-sm mt-1 font-bold text-brown">{chestNo.length > 0 ? !filteredCandidate ? "No candidates font" : filteredCandidate?.name : ""}</p>
+            <button className="w-full bg-brown text-white font-bold px-3 py-2 rounded-lg mt-3">
               Add Candidate
             </button>
           </form>
