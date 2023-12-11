@@ -39,7 +39,7 @@ function Header() {
         
       </div>
       <div className="flex fixed bottom-0 shadow-lg shadow-black bg-white md:hidden w-full  items-center justify-center p-2 ">
-        {" "}
+
         <Link
           className=" bg-white text-primary p-2 hover:bg-secondary text-xs rounded-2xl mx-1 flex flex-col items-center justify-center"
           href="/admin/"
