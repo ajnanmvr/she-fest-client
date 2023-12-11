@@ -72,28 +72,60 @@ const CreateProgram = (props: Props) => {
           }}
           className={`p-3 text-left`}
         >
-          <p className="text-sm mt-3 font-bold text-primary">Name</p>
+          <p className="w-full text-sm mt-3 font-bold text-primary">Name</p>
           <input
             type="text"
-            className="border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={`Name`}
           />
-          <p className="text-sm mt-3 font-bold text-primary">Category</p>
+          <p className="w-full text-sm mt-3 font-bold text-primary">Category</p>
           <select
-            className="border-2  border-primary rounded-md placeholder:text-sm p-2 w-full"
+            className="w-full border-2  border-primary rounded-md placeholder:text-sm p-2"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">Select Category</option>
-            {props.categories.map((category, index) => (
+            {props.categories?.map((category, index) => (
               <option key={index} value={category.name as string}>
                 {category.name}
               </option>
             ))}
           </select>
-          
+          <p className="w-full text-sm mt-3 font-bold text-primary">Candidate Count</p>
+          <input
+            type="number"
+            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            value={candidateCount}
+            onChange={(e) => setCandidateCount(parseInt(e.target.value))}
+            placeholder={`Candidate Count`}
+          />
+          <p className="w-full text-sm mt-3 font-bold text-primary">Duration</p>
+          <input
+            type="number"
+            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            value={duration}
+            onChange={(e) => setDuration(parseInt(e.target.value))}
+            placeholder={`Duration`}
+          />
+          <p className="w-full text-sm mt-3 font-bold text-primary">Group Count</p>
+          <input
+            type="number"
+            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            value={groupCount}
+            onChange={(e) => setGroupCount(parseInt(e.target.value))}
+            placeholder={`Group Count`}
+          />
+          <p className="w-full text-sm mt-3 font-bold text-primary">Program Code</p>
+          <input
+            type="text"
+            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            value={programCode}
+            onChange={(e) => setProgramCode(e.target.value)}
+            placeholder={`Program Code`}
+          />
+          <p className="w-full text-sm mt-3 font-bold text-primary">Type</p>
           <button className="w-full bg-primary text-white font-bold px-3 py-2 rounded-lg mt-3">
             Submit
           </button>

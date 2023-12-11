@@ -1,5 +1,5 @@
 'use client';
-import { Candidate, Category, Programme, Roles } from '@/gql/graphql';
+import { Candidate, Category, Programme, Roles, Zone } from '@/gql/graphql';
 import { SERVER_URL } from '@/lib/urql';
 import { withUrqlClient } from 'next-urql';
 import Link from 'next/link';
@@ -14,6 +14,7 @@ interface Props {
   programmes: Programme[];
   categories: Category[];
   candidates: Candidate[];
+  zones: Zone[];
 }
 function Programs(props: Props) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -26,7 +27,7 @@ function Programs(props: Props) {
 
   const { data } = useGlobalContext();
 
-  const filteredData = programs.filter((program) => {
+  const filteredData = programs?.filter((program) => {
     return (
       program?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       program?.programCode?.toLowerCase().includes(searchTerm.toLowerCase())
@@ -72,7 +73,7 @@ function Programs(props: Props) {
             )}
           </div>
           <div className="flex flex-wrap gap-2 justify-center mt-3">
-            {filteredData.map((program, index) => (
+            {filteredData?.map((program, index) => (
               <div
                 className="w-72 bg-secondary p-6 rounded-xl flex flex-col gap-2 items-start "
               >
@@ -155,6 +156,8 @@ function Programs(props: Props) {
         setPrograms={setPrograms}
         programs={programs}
         selected={selected as Programme}
+        candidates={props.candidates}
+        zones={props.zones}
       />
       <DeleteProgramme
         programmes={programs}
