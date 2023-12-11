@@ -8,8 +8,6 @@ import { SERVER_URL } from '@/lib/urql'
 import { cacheExchange, fetchExchange } from 'urql'
 
 const inter = Inter({ subsets: ['latin'] })
-
-
  function RootLayout({
   children,
 }: {
