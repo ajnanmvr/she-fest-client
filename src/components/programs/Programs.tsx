@@ -1,5 +1,5 @@
 'use client';
-import { Candidate, Category, Programme, Roles, Zone } from '@/gql/graphql';
+import { Candidate, Category, Programme, Roles, Type, Types, Zone } from '@/gql/graphql';
 import { SERVER_URL } from '@/lib/urql';
 import { withUrqlClient } from 'next-urql';
 import Link from 'next/link';
@@ -83,7 +83,9 @@ function Programs(props: Props) {
                     {program.category?.name}
                   </h1>
                   <h1 className="text-primary font-semibold">
-                    {program.candidateCount} Candidates
+                    {
+                      program.type == Types.Single ? program.candidateCount + " Candidates" : program.candidateCount + "x" + program.groupCount + " Groups"
+                    }
                   </h1>
                 </div>
                 <div 

@@ -4,6 +4,7 @@ query GetAllProgrammes($api_key: String!) {
     name
     programCode
     # resultEntered
+    type
     # resultPublished
     candidateCount
     category {
