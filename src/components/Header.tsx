@@ -12,33 +12,34 @@ function Header() {
         <div className="bg-white px-10">
           <img src="/img/logo.png" alt="logo" className="h-24" />
         </div>
-        <div>
-          <Link
-            className="bg-white border px-3 py-1 border-brown hover:bg-yellow hover:text-black font-semibold rounded-2xl mx-1"
-            href="/admin/"
-          >
-            Home
-          </Link>
-          <Link
-            className="bg-white border px-3 py-1 border-brown hover:bg-yellow hover:text-black font-semibold rounded-2xl mx-1"
-            href="/admin/programs"
-          >
-            Programs
-          </Link>
-          <Link
-            className="bg-white border px-3 py-1 border-brown hover:bg-yellow hover:text-black font-semibold rounded-2xl mx-1"
-            href="/admin/candidates/"
-          >
-            Candidates
-          </Link>
-          {(data.roles == Roles.Controller || data.roles == Roles.Admin) && (
-            <Link
-              className="bg-white border px-3 py-1 border-brown hover:bg-yellow hover:text-black font-semibold rounded-2xl mx-1"
-              href="/admin/institutions/"
-            >
-              institutions
+
+        <div className="bg-white flex-col flex py-2 px-8">
+          <div className="flex gap-1 text-sm font-semibold justify-center text-center">
+            <Link className="" href="/admin/">
+              Home
             </Link>
-          )}
+            |
+            <Link className="" href="/admin/programs">
+              Programs
+            </Link>{" "}
+            |
+            <Link className="" href="/admin/candidates/">
+              Candidates
+            </Link>
+            {(data.roles == Roles.Controller || data.roles == Roles.Admin) && (
+              <>
+                |{" "}
+                <Link className="" href="/admin/institutions/">
+                  institutions
+                </Link>
+              </>
+            )}
+          </div>
+          <p className="text-5xl text-center mt-1 font-bold relative">
+            Programs
+            <img src="/img/flower.svg" alt="flower" className="w-8 absolute right-4 -bottom-2" />
+          </p>
+
         </div>
       </div>
       <div className="flex fixed bottom-0 shadow-lg shadow-black bg-white md:hidden w-full items-center justify-center p-2 ">
