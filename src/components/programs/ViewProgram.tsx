@@ -138,7 +138,7 @@ const   ViewProgram = (props: Props) => {
                     </select>
                   </div>
                   <div className="w-full   overflow-y-auto">
-                    {selectedCandidateProgramme?.map((cp) => {
+                    {props.selected?.candidateProgramme?.map((cp) => {
                       return (
                         <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
                           <p className="text-white font-black text-2xl bg-primary rounded-md  mx-auto">

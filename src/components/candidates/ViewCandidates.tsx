@@ -21,6 +21,20 @@ const ViewCandidates = (props:Props) => {
         
    
     <div className='w-full flex justify-center gap-2 mt-2'>
+    <div className="w-full   overflow-y-auto">
+                    {props.selected?.candidateProgrammes?.map((cp) => {
+                      return (
+                        <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
+                          <p className="text-white font-black text-2xl bg-primary rounded-md  mx-auto">
+                            {cp.programme?.programCode}
+                          </p>
+                          <p className="text-primary font-bold">
+                            {cp.programme?.name}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
       <button
         className="bg-red-600 text-white py-1 px-2 rounded-md text-base"
         onClick={() => props.setIsView(false)}
