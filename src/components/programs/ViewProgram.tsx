@@ -141,7 +141,7 @@ const ViewProgram = (props: Props) => {
                     {selectedCandidateProgramme?.map((cp) => {
                       return (
                         <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
-                          <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                          <p className="text-white font-black text-2xl bg-primary rounded-md  mx-auto">
                             {cp.candidate?.chestNO}{' '}
                           </p>
                           <p className="text-primary font-bold">
@@ -176,7 +176,7 @@ const ViewProgram = (props: Props) => {
                     key={i}
                     className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between"
                   >
-                    <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                    <p className="text-white font-black text-2xl bg-primary rounded-md     mx-auto">
                       {cp.candidate?.chestNO}{' '}
                     </p>
                     <p className="text-primary font-bold">
