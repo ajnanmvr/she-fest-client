@@ -31,6 +31,7 @@ function Candidates(props: Props) {
       candidate?.chestNO?.toLowerCase().includes(searchTerm.toLowerCase())
     );
   });
+  
   return (
     <>
       <div className="p-12 pt-0 lg:p-20">
