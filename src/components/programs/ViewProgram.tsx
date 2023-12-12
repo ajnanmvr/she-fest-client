@@ -44,7 +44,6 @@ const ViewProgram = (props: Props) => {
   const [type, setType] = React.useState<string>("");
   const [mode, setMode] = React.useState<string>("");
   const [conceptNote, setConceptNote] = React.useState<string>("");
-  const [lookUp, setLookUp] = React.useState<string>("");
   let filteredCandidate = candidates?.find((candidate) => {
     return (
       candidate?.chestNO?.toLowerCase() == chestNo.toLowerCase()
@@ -214,7 +213,6 @@ const ViewProgram = (props: Props) => {
               value={chestNo}
               onChange={(e) => {
                 setChestNo(e.target.value);
-
               }}
               placeholder={`Chest No`}
             />

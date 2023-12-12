@@ -14,16 +14,16 @@ export default async function Page() {
   });
 
   const zones = await client.query<
-  GetAllZonesQuery,
-  GetAllZonesQueryVariables
->(GetAllZonesDocument, {
-});
+    GetAllZonesQuery,
+    GetAllZonesQueryVariables
+  >(GetAllZonesDocument, {
+  });
 
 
 
   return (
     <div>
-      <Institutions pageProps={1} teams = {teams.data?.teams as Team[]} zones = {zones.data?.zones as Zone[]}/>
+      <Institutions pageProps={1} teams={teams.data?.teams as Team[]} zones={zones.data?.zones as Zone[]} />
     </div>
   );
 }

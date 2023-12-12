@@ -6,7 +6,7 @@ import {
   Category,
   Zone,
 } from '@/gql/graphql';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { OperationResult, useMutation } from 'urql';
 
 interface Props {
@@ -36,6 +36,14 @@ const UpdateTeam = (props: Props) => {
     props.selected?.shortName as string
   );
 
+  useEffect(() => {
+    setName(props.selected?.name as string);
+    setZoneId(props.selected?.zone as number);
+    setColor(props.selected?.color as string);
+    setDescription(props.selected?.description as string);
+    setShortName(props.selected?.shortName as string);
+  }, [props.selected]);
+
   const HandleSubmit = async () => {
     const datas: OperationResult<EditTeamMutation, EditTeamMutationVariables> =
       await UpdateTeamExecute({
@@ -56,9 +64,8 @@ const UpdateTeam = (props: Props) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center  items-center  ${
-        props.isUpdate ? 'block' : 'hidden'
-      } `}
+      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center  items-center  ${props.isUpdate ? 'block' : 'hidden'
+        } `}
     >
       <div className="bg-white p-3 rounded-xl flex flex-col items-center max-w-[400px] text-center">
         <form
@@ -108,8 +115,8 @@ const UpdateTeam = (props: Props) => {
           >
             <option value="">Select Zone</option>
             {props.zones?.map((zone, index) => (
-              <option key={index} value={zone.id as number}>
-                {zone.name}
+              <option key={index} value={zoneId || zone.id as number}>
+                {props.zones.find((z) => z.id === zone.id)?.name}
               </option>
             ))}
           </select>

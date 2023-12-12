@@ -48,6 +48,9 @@ mutation AddTeam(
   ) {
     id
     name
+    description
+    shortName
+    color
   }
 }
 
