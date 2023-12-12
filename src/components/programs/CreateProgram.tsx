@@ -38,6 +38,15 @@ const CreateProgram = (props: Props) => {
   const modesOfProgram = Object.values(Mode);
 
   const HandleSubmit = async () => {
+    setName('');
+    setCandidateCount(0);
+    setCategory('');
+    setDuration(0);
+    setGroupCount(0);
+    setProgramCode('');
+    setType('');
+    setMode('');
+    setConceptNote('');
     const datas: OperationResult<
       AddProgrammeMutation,
       AddProgrammeMutationVariables

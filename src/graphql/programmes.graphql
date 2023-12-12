@@ -5,6 +5,7 @@ query GetAllProgrammes($api_key: String!) {
     programCode
     # resultEntered
     type
+    mode
     # resultPublished
     candidateCount
     groupCount
@@ -384,9 +385,18 @@ mutation AddProgramme(
   ) {
     id
     name
+    candidateCount
+    category {
+      name
+    }
+    duration
+    groupCount
+    programCode
+    type
+    mode
+    conceptNote
     resultEntered
     resultPublished
-    programCode
   }
 }
 
