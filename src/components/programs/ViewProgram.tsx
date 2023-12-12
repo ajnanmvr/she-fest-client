@@ -47,10 +47,16 @@ const   ViewProgram = (props: Props) => {
   const [type, setType] = React.useState<string>("");
   const [mode, setMode] = React.useState<string>("");
   const [conceptNote, setConceptNote] = React.useState<string>("");
+  const [selectedCandidateProgramme,setSelectedCandidateProgramme] = React.useState<CandidateProgramme[]>(props.selected.candidateProgramme as CandidateProgramme[])
   let filteredCandidate = candidates?.find((candidate) => {
     return candidate?.chestNO?.toLowerCase() == chestNo.toLowerCase();
   });
   const { data, setData } = useGlobalContext();
+
+  useEffect(() => {
+  console.log(selectedCandidateProgramme);
+  
+  }, [])
 
   const HandleSubmit = async () => {
     const datas: OperationResult<
@@ -63,11 +69,9 @@ const   ViewProgram = (props: Props) => {
     console.log(datas);
 
     if (datas.data?.createCandidateProgramme) {
-      props.setSelected({
-        ...props.selected,
-        candidateProgramme: [...props.selected?.candidateProgramme as CandidateProgramme[],
-        datas.data?.createCandidateProgramme as CandidateProgramme]
-      })
+      setSelectedCandidateProgramme([...selectedCandidateProgramme,datas.data.createCandidateProgramme as CandidateProgramme])
+      console.log(selectedCandidateProgramme);
+      
       // props.setIsView(false);
     }
     // if (datas.data?.createCandidateProgramme) {
@@ -134,7 +138,7 @@ const   ViewProgram = (props: Props) => {
                     </select>
                   </div>
                   <div className="w-full   overflow-y-auto">
-                    {props.selected?.candidateProgramme?.map((cp) => {
+                    {selectedCandidateProgramme?.map((cp) => {
                       return (
                         <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
                           <p className="text-white font-black text-2xl bg-primary rounded-md  mx-auto">
