@@ -8,6 +8,7 @@ import CreateCandidate from './CreateCandidate';
 import UpdateCandidate from './UpdateCandidate';
 import DeleteCandidate from './DeleteCandidate';
 import { useGlobalContext } from '@/context/context';
+import ViewCandidates from './ViewCandidates';
 
 interface Props {
   candidates: Candidate[];
@@ -20,6 +21,7 @@ function Candidates(props: Props) {
   const [isCreate, setIsCreate] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
+  const [isView, setIsView] = useState(false);
   const [selected, setSelected] = useState<Candidate | null>(null);
 
   const {data , setData } = useGlobalContext()
@@ -79,7 +81,13 @@ function Candidates(props: Props) {
                 <h1 className="px-2 py-1 bg-primary inline rounded-lg text-white font-semibold">
                   {candidate.chestNO}
                 </h1>
-                <p className="line-clamp-2 h-12">{candidate.name}</p>
+                <div 
+                onClick={() => {
+                  setSelected(candidate);
+                  setIsView(true);
+                }} className="line-clamp-2 border-2 h-16 p-3 my-2 border-primary flex cursor-pointer items-center justify-center rounded-xl border-dashed w-full">
+                  <p className="line-clamp-2 text-center">{candidate.name}</p>
+                </div>
                 {
                   (data.roles == Roles.Controller || data.roles == Roles.Admin ) && (
                     <div className="flex w-full justify-between">
@@ -154,6 +162,12 @@ function Candidates(props: Props) {
         isDelete={isDelete}
         setIsDelete={setIsDelete}
         selected={selected}
+      />
+       <ViewCandidates
+        isView={isView}
+        setIsView={setIsView}
+        selected={selected as Candidate}
+        setSelected={setSelected as any}
       />
     </>
   );

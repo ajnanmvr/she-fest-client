@@ -7,6 +7,7 @@ query GetAllProgrammes($api_key: String!) {
     type
     # resultPublished
     candidateCount
+    groupCount
     category {
       name
     }

@@ -9,6 +9,13 @@ query GetAllCandidates($api_key: String!) {
     team {
       name
     }
+    candidateProgrammes {
+      programme {
+        name
+        programCode
+        type
+      }
+    }
   }
 }
 

@@ -28,7 +28,7 @@ interface Props {
   zones: Zone[];
 }
 
-const ViewProgram = (props: Props) => {
+const   ViewProgram = (props: Props) => {
   const [state, ViewProgramExecute] = useMutation(
     AddCandidateProgrammeDocument
   );
