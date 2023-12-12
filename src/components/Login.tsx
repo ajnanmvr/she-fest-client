@@ -39,8 +39,10 @@ function Login() {
       console.log(datas);
       setError("");
       setData(datas.data.login);
+      // location.reload();
       router.push("/admin");
     }
+
   };
 
   return (
