@@ -51,7 +51,6 @@ const ViewProgram = (props: Props) => {
 
   useEffect(() => {
     console.log(selectedCandidateProgramme);
-
   }, [])
 
   const HandleSubmit = async () => {
