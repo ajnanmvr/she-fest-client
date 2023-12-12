@@ -23,6 +23,7 @@ interface Props {
   setPrograms: React.Dispatch<React.SetStateAction<Programme[]>>;
   categories: Category[];
   selected: Programme;
+  setSelected: React.Dispatch<React.SetStateAction<Programme>>;
   candidates: Candidate[];
   zones: Zone[];
 }
@@ -62,98 +63,97 @@ const ViewProgram = (props: Props) => {
     console.log(datas);
 
     if (datas.data?.createCandidateProgramme) {
-      const newProgramme = datas.data?.createCandidateProgramme as CandidateProgramme;
-      const existingProgramIndex = props.programs.findIndex(
-        (program) => program.id === newProgramme.programme?.id
-      );
-    
-      if (existingProgramIndex !== -1) {
-        // Update existing program
-        const updatedPrograms = [...props.programs];
-        updatedPrograms[existingProgramIndex].candidateProgramme?.push(newProgramme)
-        props.setPrograms(updatedPrograms);
-      } else {
-        // Add new program
-        props.setPrograms([...props.programs]);
-      }
-    
-      props.setIsView(false);
+      props.setSelected({
+        ...props.selected,
+        candidateProgramme: [...props.selected?.candidateProgramme as CandidateProgramme[],
+        datas.data?.createCandidateProgramme as CandidateProgramme]
+      })
+      // props.setIsView(false);
     }
-    
-  };
+    // if (datas.data?.createCandidateProgramme) {
+    //   const newProgramme = datas.data?.createCandidateProgramme as CandidateProgramme;
+    //   const existingProgramIndex = props.programs.findIndex(
+    //     (program) => program.id === newProgramme.programme?.id
+    //   );
 
-  const searchCandidate = (e: any) => {
-    setChestNo(e.target.value);
-    return props.candidates.filter((candidate) => {
-      candidate.chestNO == chestNo && setName(candidate.name as string);
-      candidate.chestNO == chestNo && console.log(candidate.name);
-    });
+    //   if (existingProgramIndex !== -1) {
+    //     // Update existing program
+    //     const updatedPrograms = [...props.programs];
+    //     updatedPrograms[existingProgramIndex].candidateProgramme?.push(newProgramme)
+    //     props.setPrograms(updatedPrograms);
+    //   } else {
+    //     // Add new program
+    //     props.setPrograms([...props.programs]);
+    //   }
+
+    //   props.setIsView(false);
+    // }
+
   };
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center  items-center  ${
-        props.isView ? 'block' : 'hidden'
-      } `}
+      className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center  items-center  ${props.isView ? 'block' : 'hidden'
+        } `}
     >
       <div className="bg-white p-3 rounded-xl flex flex-col items-center min-w-[400px]  max-w-[400px] max-h-[95vh] text-center ">
         {(data.admin?.roles == Roles.Admin ||
           data.admin?.roles == Roles.Controller ||
           data?.roles == Roles.Controller) && (
-          <>
-            {
-              <>
-                <p className="text-lg mt-3 font-bold text-primary">
-                  Candidates
-                </p>
-                <div className="flex w-full gap-1">
-                  <input
-                    type="text"
-                    className="w-3/5 border-2  border-primary rounded-md placeholder:text-sm py-2 px-3 my-2"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder={`Search by name or chest number..`}
-                  />
-                  <select
-                    className="w-2/5 border-2  border-primary rounded-md placeholder:text-sm py-2 px-3 my-2"
-                    value={zone}
-                    onChange={(e) => setZone(e.target.value)}
-                  >
-                    <option value="" className="text-center">
-                      Select Zone
-                    </option>
-                    {zones?.map((zone, index) => (
-                      <option
-                        className="text-center"
-                        key={index}
-                        value={zone.name as string}
-                      >
-                        {zone.name}
+            <>
+              {
+                <>
+                  <p className="text-lg mt-3 font-bold text-primary">
+                    Candidates
+                  </p>
+                  <div className="flex w-full gap-1">
+                    <input
+                      type="text"
+                      className="w-3/5 border-2  border-primary rounded-md placeholder:text-sm py-2 px-3 my-2"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder={`Search by name or chest number..`}
+                    />
+                    <select
+                      className="w-2/5 border-2  border-primary rounded-md placeholder:text-sm py-2 px-3 my-2"
+                      value={zone}
+                      onChange={(e) => setZone(e.target.value)}
+                    >
+                      <option value="" className="text-center">
+                        Select Zone
                       </option>
-                    ))}
-                  </select>
-                </div>
-                <div className="w-full   overflow-y-auto">
-                  {props.selected?.candidateProgramme?.map((cp) => {
-                    return (
-                      <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
-                        <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
-                          {cp.candidate?.chestNO}{' '}
-                        </p>
-                        <p className="text-primary font-bold">
-                          {cp.candidate?.name}
-                        </p>
-                        <p className="text-primary font-semibold">
-                          {cp.candidate?.team?.name}
-                        </p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </>
-            }
-          </>
-        )}
+                      {zones?.map((zone, index) => (
+                        <option
+                          className="text-center"
+                          key={index}
+                          value={zone.name as string}
+                        >
+                          {zone.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="w-full   overflow-y-auto">
+                    {props.selected?.candidateProgramme?.map((cp) => {
+                      return (
+                        <div className="border-2 border-primary rounded-lg p-3 my-2 w-full justify-between">
+                          <p className="text-white font-black text-2xl bg-primary rounded-md w-1/3 mx-auto">
+                            {cp.candidate?.chestNO}{' '}
+                          </p>
+                          <p className="text-primary font-bold">
+                            {cp.candidate?.name}
+                          </p>
+                          <p className="text-primary font-semibold">
+                            {cp.candidate?.team?.name}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              }
+            </>
+          )}
 
         {data.roles == Roles.TeamManager && (
           <div
