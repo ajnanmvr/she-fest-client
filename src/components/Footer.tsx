@@ -9,6 +9,7 @@ function Footer() {
           <img src="/img/logo.svg" alt="logo" className="h-36" />
         </div>
         <div className="w-full px-4">
+             
           <div className="flex flex-wrap sm:flex-nowrap items-top my-10 justify-center lg:justify-end xl:mr-32 gap-10">
             <div className="px-4">
               <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">
