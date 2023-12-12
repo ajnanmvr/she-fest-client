@@ -217,7 +217,7 @@ const ViewProgram = (props: Props) => {
         {data.roles == Roles.TeamManager && (
           <div>
             {props.selected.candidateProgramme?.map((cp, i) => {
-              if (cp.candidate?.team?.name == data.team.name) {
+              if (cp.candidate?.team?.name == data.team?.name) {
                 return (
                   <div
                     key={i}
@@ -277,7 +277,7 @@ const ViewProgram = (props: Props) => {
         {data &&
           data.roles == Roles.TeamManager &&
           (props.selected?.candidateProgramme?.filter((cp) => {
-            return cp.candidate?.team?.name == data.team.name;
+            return cp.candidate?.team?.name == data.team?.name;
           }).length as any) < (props.selected?.candidateCount as any) && (
             <form
               onSubmit={(e) => {
