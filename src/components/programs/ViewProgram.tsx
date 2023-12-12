@@ -65,8 +65,28 @@ const ViewProgram = (props: Props) => {
     console.log(datas);
 
     if (datas.data?.createCandidateProgramme) {
-      setSelectedCandidateProgramme([...selectedCandidateProgramme, datas.data.createCandidateProgramme as CandidateProgramme])
-      console.log(selectedCandidateProgramme);
+
+      // update the state of candiateProgramme
+      setSelectedCandidateProgramme([...selectedCandidateProgramme , datas.data?.createCandidateProgramme] as  CandidateProgramme[])
+      
+      // update all programs state
+
+      props.setPrograms(props.programs.map((program) => {
+        if (program.id == props.selected.id) {
+          return {
+            ...program,
+            candidateProgramme: [...program.candidateProgramme as CandidateProgramme[] , datas.data?.createCandidateProgramme] as CandidateProgramme[]
+          }
+        }
+        return program
+      }))
+
+      // update the state of selected program
+
+      props.setSelected({
+        ...props.selected,
+        candidateProgramme: [...props.selected.candidateProgramme as CandidateProgramme[] , datas.data?.createCandidateProgramme] as CandidateProgramme[]
+      })
 
       // props.setIsView(false);
     }
@@ -85,6 +105,35 @@ const ViewProgram = (props: Props) => {
     > = await deleteCPExicute({
       id: toDeleteCP?.id as number
     });
+
+    // update the state of candiateProgramme
+    setSelectedCandidateProgramme(selectedCandidateProgramme.filter((cp) => {
+      return cp.id != toDeleteCP?.id
+    }))
+
+    // update all programs state
+
+    props.setPrograms(props.programs.map((program) => {
+      if (program.id == props.selected.id) {
+        return {
+          ...program,
+          candidateProgramme: program.candidateProgramme?.filter((cp) => {
+            return cp.id != toDeleteCP?.id
+          })
+        }
+      }
+      return program
+    }))
+
+    // update the state of selected program
+
+    props.setSelected({
+      ...props.selected,
+      candidateProgramme: props.selected.candidateProgramme?.filter((cp) => {
+        return cp.id != toDeleteCP?.id
+      })
+    })
+
   };
 
   return (
@@ -152,16 +201,8 @@ const ViewProgram = (props: Props) => {
           )}
 
         {data.roles == Roles.TeamManager && (
-          <div
-            onClick={() => {
-              console.log(
-                (props.selected?.candidateProgramme?.filter((cp) => {
-                  return cp.candidate?.team?.name == data.team.name;
-                }).length as any) < (props.selected?.candidateCount as any)
-              );
-            }}
-          >
-            {props.selected?.candidateProgramme?.map((cp, i) => {
+          <div>
+            {selectedCandidateProgramme?.map((cp, i) => {
               if (cp.candidate?.team?.name == data.team.name) {
                 return (
                   <div
