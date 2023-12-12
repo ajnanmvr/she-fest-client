@@ -162,19 +162,19 @@ const ViewProgram = (props: Props) => {
             <>
               {
                 <>
-                  <p className="text-lg mt-3 font-bold text-primary">
+                  <p className="text-lg mt-3 font-bold text-brown">
                     Candidates
                   </p>
                   <div className="flex w-full gap-1">
                     <input
                       type="text"
-                      className="w-3/5 border-2  border-primary rounded-md placeholder:text-sm py-2 px-3 my-2"
+                      className="w-3/5 border-2  border-brown rounded-md placeholder:text-sm py-2 px-3 my-2"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder={`Search by name or chest number..`}
                     />
                     <select
-                      className="w-2/5 border-2  border-primary rounded-md placeholder:text-sm py-2 px-3 my-2"
+                      className="w-2/5 border-2  border-brown rounded-md placeholder:text-sm py-2 px-3 my-2"
                       value={zone}
                       onChange={(e) => setZone(e.target.value)}
                     >

@@ -57,25 +57,25 @@ const UpdateCandidate = (props: Props) => {
           }}
           className={`p-3 text-left`}
           >
-          <p className="text-sm mt-3 font-bold text-primary">Chest No</p>
+          <p className="text-sm mt-3 font-bold text-brown">Chest No</p>
           <input
             type="text"
-            className="border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={chestNO}
             onChange={(e) => setChestNO(e.target.value)}
             placeholder={`Chest Name`}
           />
-          <p className="text-sm mt-3 font-bold text-primary">Name</p>
+          <p className="text-sm mt-3 font-bold text-brown">Name</p>
           <input
             type="text"
-            className="border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={`Name`}
           />
-          <p className="text-sm mt-3 font-bold text-primary">Category</p>
+          <p className="text-sm mt-3 font-bold text-brown">Category</p>
           <select
-            className="border-2  border-primary rounded-md placeholder:text-sm p-2 w-full"
+            className="border-2  border-brown rounded-md placeholder:text-sm p-2 w-full"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -86,9 +86,9 @@ const UpdateCandidate = (props: Props) => {
               </option>
             ))}
           </select>
-          <p className="text-sm mt-3 font-bold text-primary">Team</p>
+          <p className="text-sm mt-3 font-bold text-brown">Team</p>
           <select
-            className="border-2  border-primary rounded-md placeholder:text-sm p-2 w-full"
+            className="border-2  border-brown rounded-md placeholder:text-sm p-2 w-full"
             value={team}
             onChange={(e) => setTeam(e.target.value)}
           >
@@ -99,7 +99,7 @@ const UpdateCandidate = (props: Props) => {
               </option>
             ))}
           </select>
-          <button className="w-full bg-primary text-white font-bold px-3 py-2 rounded-lg mt-3">
+          <button className="w-full bg-brown text-white font-bold px-3 py-2 rounded-lg mt-3">
             Submit
           </button>
         </form>
