@@ -10,7 +10,7 @@ function Header() {
     <>
       <div className="hidden px-10 md:flex w-full bg-h-line bg-cover bg-center items-center justify-between my-6">
         <div className="bg-white px-10">
-          <img src="/img/logo.png" alt="logo" className="h-24" />
+          <img src="/img/logo.svg" alt="logo" className="h-24" />
         </div>
 
         <div className="bg-white flex-col flex py-2 px-8">
@@ -37,7 +37,7 @@ function Header() {
           </div>
           <p className="text-5xl text-center mt-1 font-bold relative">
             Programs
-            <img src="/img/flower.svg" alt="flower" className="w-8 absolute right-4 -bottom-2" />
+            <img src="/img/flowers/yellow.svg" alt="flower" className="w-8 absolute right-4 -bottom-2" />
           </p>
 
         </div>

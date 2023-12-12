@@ -19,7 +19,7 @@ export default function Page() {
         <h1 className="text-5xl text-center mt-10 mb-16 font-bold relative inline">
           Controller Dashboard
           <img
-            src="/img/flower.svg"
+            src="/img/flowers/yellow.svg"
             alt="flower"
             className="w-8 absolute right-4 -bottom-2"
           />
