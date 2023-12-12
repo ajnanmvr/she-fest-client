@@ -11,6 +11,7 @@ query GetAllProgrammes($api_key: String!) {
     }
     candidateProgramme{
       candidate{
+        chestNO
         name
         team{
           name
