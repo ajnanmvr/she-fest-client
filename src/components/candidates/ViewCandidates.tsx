@@ -17,16 +17,15 @@ const ViewCandidates = (props:Props) => {
     } `}
   >
     <div className="p-5 bg-white rounded-xl gap-4">
-    <p className='text-center text-lg'>
-      Are you sure, do you want to visView candidate{' '}
-      <span className="font-bold">{props.selected?.name}</span>?
-    </p>
+
+        
+   
     <div className='w-full flex justify-center gap-2 mt-2'>
       <button
-        className="bg-primary text-white py-1 px-2 rounded-md text-base"
+        className="bg-red-600 text-white py-1 px-2 rounded-md text-base"
         onClick={() => props.setIsView(false)}
       >
-        Cancel
+        Close
       </button>
     </div>
     </div>
