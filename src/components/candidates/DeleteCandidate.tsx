@@ -47,7 +47,7 @@ function DeleteCandidate(props: Props) {
       </p>
       <div className='w-full flex justify-center gap-2 mt-2'>
         <button
-          className="bg-primary text-white py-1 px-2 rounded-md text-base"
+          className="bg-brown text-white py-1 px-2 rounded-md text-base"
           onClick={() => props.setIsDelete(false)}
         >
           Cancel

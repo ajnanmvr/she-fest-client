@@ -75,7 +75,7 @@ const CreateProgram = (props: Props) => {
         } `}
     >
       <div className="bg-white p-3 rounded-xl flex flex-col items-center min-w-[400px]  max-w-[400px] max-h-[95vh] text-center ">
-        <p className="text-lg mt-3 font-bold text-primary">Create Program</p>
+        <p className="text-lg mt-3 font-bold text-brown">Create Program</p>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -83,17 +83,17 @@ const CreateProgram = (props: Props) => {
           }}
           className={`w-full p-3 text-left overflow-y-auto`}
         >
-          <p className="w-full text-sm font-bold text-primary">Name</p>
+          <p className="w-full text-sm font-bold text-brown">Name</p>
           <input
             type="text"
-            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="w-full border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder={`Name`}
           />
-          <p className="w-full text-sm mt-3 font-bold text-primary">Category</p>
+          <p className="w-full text-sm mt-3 font-bold text-brown">Category</p>
           <select
-            className="w-full border-2  border-primary rounded-md placeholder:text-sm p-2"
+            className="w-full border-2  border-brown rounded-md placeholder:text-sm p-2"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -104,41 +104,41 @@ const CreateProgram = (props: Props) => {
               </option>
             ))}
           </select>
-          <p className="w-full text-sm mt-3 font-bold text-primary">Candidate Count</p>
+          <p className="w-full text-sm mt-3 font-bold text-brown">Candidate Count</p>
           <input
             type="number"
-            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="w-full border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={candidateCount}
             onChange={(e) => setCandidateCount(parseInt(e.target.value))}
             placeholder={`Candidate Count`}
           />
-          <p className="w-full text-sm mt-3 font-bold text-primary">Duration</p>
+          <p className="w-full text-sm mt-3 font-bold text-brown">Duration</p>
           <input
             type="number"
-            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="w-full border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={duration}
             onChange={(e) => setDuration(parseInt(e.target.value))}
             placeholder={`Duration`}
           />
-          <p className="w-full text-sm mt-3 font-bold text-primary">Group Count</p>
+          <p className="w-full text-sm mt-3 font-bold text-brown">Group Count</p>
           <input
             type="number"
-            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="w-full border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={groupCount}
             onChange={(e) => setGroupCount(parseInt(e.target.value))}
             placeholder={`Group Count`}
           />
-          <p className="w-full text-sm mt-3 font-bold text-primary">Program Code</p>
+          <p className="w-full text-sm mt-3 font-bold text-brown">Program Code</p>
           <input
             type="text"
-            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="w-full border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={programCode}
             onChange={(e) => setProgramCode(e.target.value)}
             placeholder={`Program Code`}
           />
-          <p className="w-full text-sm mt-3 font-bold text-primary">Type</p>
+          <p className="w-full text-sm mt-3 font-bold text-brown">Type</p>
           <select
-            className="w-full border-2  border-primary rounded-md placeholder:text-sm p-2"
+            className="w-full border-2  border-brown rounded-md placeholder:text-sm p-2"
             value={type}
             onChange={(e) => setType(e.target.value)}
           >
@@ -149,9 +149,9 @@ const CreateProgram = (props: Props) => {
               </option>
             ))}
           </select>
-          <p className="w-full text-sm mt-3 font-bold text-primary">Mode</p>
+          <p className="w-full text-sm mt-3 font-bold text-brown">Mode</p>
           <select
-            className="w-full border-2  border-primary rounded-md placeholder:text-sm p-2"
+            className="w-full border-2  border-brown rounded-md placeholder:text-sm p-2"
             value={mode}
             onChange={(e) => setMode(e.target.value)}
           >
@@ -162,14 +162,14 @@ const CreateProgram = (props: Props) => {
               </option>
             ))}
           </select>
-          <p className="w-full text-sm mt-3 font-bold text-primary">Concept Note</p>
+          <p className="w-full text-sm mt-3 font-bold text-brown">Concept Note</p>
           <textarea
-            className="w-full border-2  border-primary rounded-md placeholder:text-sm py-2 px-3"
+            className="w-full border-2  border-brown rounded-md placeholder:text-sm py-2 px-3"
             value={conceptNote}
             onChange={(e) => setConceptNote(e.target.value)}
             placeholder={`Concept Note`}
           />
-          <button className="w-full bg-primary text-white font-bold px-3 py-2 rounded-lg mt-3">
+          <button className="w-full bg-brown text-white font-bold px-3 py-2 rounded-lg mt-3">
             Submit
           </button>
         </form>

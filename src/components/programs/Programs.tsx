@@ -45,7 +45,7 @@ function Programs(props: Props) {
     <>
       <div className="p-12 pt-0 lg:p-20">
         <div className="flex flex-col items-center gap-4">
-          <h1 className="text-center font-extrabold text-3xl text-primary mb-3">
+          <h1 className="text-center font-extrabold text-3xl text-brown mb-3">
             Program Search
           </h1>
           <div className="md:w-2/3 flex gap-2">
@@ -54,7 +54,7 @@ function Programs(props: Props) {
               placeholder="Search by name or chest number.."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full px-4 py-2 rounded-xl border-2 border-dashed border-primary"
+              className="w-full px-4 py-2 rounded-xl border-2 border-dashed border-brown"
             />
             {(data.roles == Roles.Controller || data.roles == Roles.Admin) && (
               <button
@@ -133,7 +133,7 @@ function Programs(props: Props) {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="w-6 h-6 text-primary"
+                        className="w-6 h-6 text-brown"
                       >
                         <path
                           strokeLinecap="round"

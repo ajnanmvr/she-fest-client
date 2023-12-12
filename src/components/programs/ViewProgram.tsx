@@ -32,16 +32,19 @@ const ViewProgram = (props: Props) => {
   const [state, ViewProgramExecute] = useMutation(
     AddCandidateProgrammeDocument
   );
-  const [ status , deleteCPExicute] = useMutation(
+  const [selected , setSelected] = React.useState<Programme>(props.selected as Programme)
+  const [status, deleteCPExicute] = useMutation(
     DeleteCandidateProgrammeDocument
   );
   const [name, setName] = React.useState<string>('');
   const [chestNo, setChestNo] = React.useState<string>('');
   const [zone, setZone] = React.useState<string>('');
-  const [toDeleteCP , setToDeleteCP] = React.useState<CandidateProgramme>()
+  const [programCode, setProgramCode] = React.useState<string>(props.selected?.programCode as string);
+  const [toDeleteCP, setToDeleteCP] = React.useState<CandidateProgramme>()
   const [candidates, setCandidates] = React.useState<Candidate[]>(
     props.candidates
   );
+  const [error, setError] = React.useState<string>('')
   const [zones, setZones] = React.useState<Zone[]>(props.zones);
   const [selectedCandidateProgramme, setSelectedCandidateProgramme] = React.useState<CandidateProgramme[]>(props.selected.candidateProgramme as CandidateProgramme[])
   let filteredCandidate = candidates?.find((candidate) => {
@@ -51,7 +54,8 @@ const ViewProgram = (props: Props) => {
 
   useEffect(() => {
     console.log(selectedCandidateProgramme);
-  }, [])
+    
+  }, [props.selected])
 
   const HandleSubmit = async () => {
     const datas: OperationResult<
@@ -59,22 +63,22 @@ const ViewProgram = (props: Props) => {
       AddCandidateProgrammeMutationVariables
     > = await ViewProgramExecute({
       chestNO: chestNo,
-      programCode: props.selected?.programCode as string,
+      programCode: programCode as string,
     });
     console.log(datas);
 
     if (datas.data?.createCandidateProgramme) {
 
-      // update the state of candiateProgramme
-      setSelectedCandidateProgramme([...selectedCandidateProgramme , datas.data?.createCandidateProgramme] as  CandidateProgramme[])
+      console.log(datas.data?.createCandidateProgramme);
       
+
       // update all programs state
 
       props.setPrograms(props.programs.map((program) => {
         if (program.id == props.selected.id) {
           return {
             ...program,
-            candidateProgramme: [...program.candidateProgramme as CandidateProgramme[] , datas.data?.createCandidateProgramme] as CandidateProgramme[]
+            candidateProgramme: [...program.candidateProgramme as CandidateProgramme[], datas.data?.createCandidateProgramme] as CandidateProgramme[]
           }
         }
         return program
@@ -84,10 +88,23 @@ const ViewProgram = (props: Props) => {
 
       props.setSelected({
         ...props.selected,
-        candidateProgramme: [...props.selected.candidateProgramme as CandidateProgramme[] , datas.data?.createCandidateProgramme] as CandidateProgramme[]
+        candidateProgramme: [...props.selected.candidateProgramme as CandidateProgramme[], datas.data?.createCandidateProgramme] as CandidateProgramme[]
       })
 
+      console.log(props.selected);
+      
+
+      console.log(datas.data?.createCandidateProgramme);
+
+      // set chest no to empty
+      setChestNo("");
       // props.setIsView(false);
+    } else {
+      setError(datas.error?.message.replace("[GraphQL]", "") as string)
+      setTimeout(() => {
+        setError("")
+      }
+        , 5000)
     }
 
 
@@ -95,8 +112,6 @@ const ViewProgram = (props: Props) => {
 
   const HandleDelete = async () => {
 
-    console.log(toDeleteCP);
-    
     // delete candidate from program
     const datas: OperationResult<
       DeleteCandidateProgrammeMutation,
@@ -147,19 +162,19 @@ const ViewProgram = (props: Props) => {
             <>
               {
                 <>
-                  <p className="text-lg mt-3 font-bold text-primary">
+                  <p className="text-lg mt-3 font-bold text-brown">
                     Candidates
                   </p>
                   <div className="flex w-full gap-1">
                     <input
                       type="text"
-                      className="w-3/5 border-2  border-primary rounded-md placeholder:text-sm py-2 px-3 my-2"
+                      className="w-3/5 border-2  border-brown rounded-md placeholder:text-sm py-2 px-3 my-2"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder={`Search by name or chest number..`}
                     />
                     <select
-                      className="w-2/5 border-2  border-primary rounded-md placeholder:text-sm py-2 px-3 my-2"
+                      className="w-2/5 border-2  border-brown rounded-md placeholder:text-sm py-2 px-3 my-2"
                       value={zone}
                       onChange={(e) => setZone(e.target.value)}
                     >
@@ -201,7 +216,7 @@ const ViewProgram = (props: Props) => {
 
         {data.roles == Roles.TeamManager && (
           <div>
-            {selectedCandidateProgramme?.map((cp, i) => {
+            {props.selected.candidateProgramme?.map((cp, i) => {
               if (cp.candidate?.team?.name == data.team.name) {
                 return (
                   <div
@@ -217,26 +232,43 @@ const ViewProgram = (props: Props) => {
                     <p className="text-primary font-semibold">
                       {cp.candidate?.team?.name}
                     </p>
-                    <button onClick={async() => {
+                    <button onClick={async () => {
                       setToDeleteCP(cp)
-                     await HandleDelete()
+                      await HandleDelete()
                     }} className="bg-white border border-dashed border-primary rounded-xl px-4 py-2 ">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="currentColor"
-                        className="w-6 h-6 text-red-600"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                        />
-                      </svg>
+
+                      {
+                        status.fetching ? (
+                          <div>
+                            <div className="flex justify-center items-center">
+                              <div className="flex justify-center items-center relative">
+                                <div className="absolute animate-ping w-5 h-5 rounded-full bg-red-400 opacity-75"></div>
+                                <div className="relative w-5 h-5 rounded-full bg-red-600"></div>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6 text-red-600"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                            />
+                          </svg>
+                        )
+
+                      }
+
                     </button>
                   </div>
+
                 );
               }
             })}
@@ -274,6 +306,10 @@ const ViewProgram = (props: Props) => {
                     : filteredCandidate?.name
                   : ''}
               </p>
+              {/* error */}
+              <p className="text-sm mt-1 font-bold text-red-600">
+                {error}
+              </p>
               <button className="w-full bg-primary text-white font-bold px-3 py-2 rounded-lg mt-3">
                 Add Candidate
               </button>
@@ -284,6 +320,8 @@ const ViewProgram = (props: Props) => {
           onClick={() => {
             props.setIsView(false);
             console.log(data);
+            // set chest no to empty
+            setChestNo("");
           }}
         >
           Close
